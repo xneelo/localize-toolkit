@@ -112,7 +112,11 @@ interface ILocalizeProviderProps {
 
 ```ts
 ReactDom.render(
-  <LocalizeProvider loading={<div>{'Loading...'}</div>}>
+  <LocalizeProvider
+    loadingComponent={<div>{'Loading...'}</div>}
+    getLanguage={getLocalizeObject}
+    initLanguage="en"
+  >
     <App />
   </LocalizeProvider>,
   document.getElementById('root'),
