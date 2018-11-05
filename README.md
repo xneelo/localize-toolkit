@@ -39,7 +39,7 @@ localization library to provide a robust localization tool for React projects.
 
 ---
 
-## Features
+**Features**:
 
 1. Loading placeholder prop while language is being fetched
 1. Reloading of every translated phrase upon language switch without remounting
@@ -47,15 +47,15 @@ localization library to provide a robust localization tool for React projects.
 1. Language map object cache to avoid repeat fetching
 1. Static localization method for non-React files
 
-## Exported API
+**Exported Members**:
 
-1. LocalizeProvider
+1. **LocalizeProvider**
    - The provider for the localize context
-1. LocalizeContext
+1. **LocalizeContext**
    - The context for use within Components
-1. Localize
+1. **Localize**
    - A consumer wrapped in a React component for ease of use
-1. staticTranslate
+1. **staticTranslate**
    - Provides translation functionality outside of React components
 
 ## LocalizeProvider
