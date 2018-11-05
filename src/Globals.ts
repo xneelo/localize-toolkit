@@ -5,9 +5,9 @@ import { ILanguageObject } from './LocalizeProvider';
 // Types
 
 export interface ILocalizeContextValue {
-  setLanguage?: (language: string, languageObject?: ILanguageObject | null, shouldCache?: boolean) => Promise<void>;
+  setLanguage?: (language: string, languageObject?: ILanguageObject, shouldCache?: boolean) => Promise<void>;
   isLanguageCached?: (language: string) => boolean;
-  clearCache?: () => void;
+  clearCache?: (language?: string) => void;
   currentLanguage?: string;
   isLoaded?: boolean;
   t?(phrase: string): string;

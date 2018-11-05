@@ -4,7 +4,7 @@ import * as React from 'react';
  * Temporary declaration of hooks until TypeScript supports them.
  */
 declare module 'react' {
-  function useState<T>(initialState: T | (() => T)): [T, (newState: T) => void];
+  function useState<T>(initialState: T | (() => T)): [T, (newState: T | ((previousState: T) => T)) => void];
   function useEffect(create: () => void | (() => void), inputs?: ReadonlyArray<unknown>): void;
   function useContext<T>(foo: React.Context<T>): T;
   function useReducer<S, A>(reducer: (state: S, action: A) => S, initialState: S): [S, (action: A) => void];

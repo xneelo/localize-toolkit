@@ -11,7 +11,6 @@ export interface ILanguageObject {
 }
 
 export interface ILocalizeProviderProps {
-  children: React.ReactNode;
   initLanguage?: string;
   initLanguageObject?: ILanguageObject;
   getLanguage?: (language: string) => ILanguageObject;
@@ -21,17 +20,17 @@ export interface ILocalizeProviderProps {
 
 export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
   children,
-  initLanguage = '',
-  initLanguageObject = null,
-  getLanguage = null,
-  onFailed = null,
-  loadingComponent = null,
+  initLanguage,
+  initLanguageObject,
+  getLanguage,
+  onFailed,
+  loadingComponent,
 }) => {
-  const [currentLanguage, setCurrentLanguage] = React.useState('');
+  const [currentLanguage, setCurrentLanguage] = React.useState<string>('');
 
-  const [languageObjects, setLanguageObjects] = React.useState({});
+  const [languageObjects, setLanguageObjects] = React.useState<{ [language: string]: ILanguageObject }>({});
 
-  const [status, setStatus] = React.useState(ProviderStatus.Loading);
+  const [status, setStatus] = React.useState<ProviderStatus>(ProviderStatus.Loading);
 
   React.useEffect(() => {
     if (!currentLanguage && initLanguage) {
@@ -49,11 +48,7 @@ export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
    * @param shouldCache Optional. Should cache the resulting language
    * object for future reference.
    */
-  const setLanguage = async (
-    language: string,
-    languageObject: ILanguageObject | null = null,
-    shouldCache: boolean = true,
-  ) => {
+  const setLanguage = async (language: string, languageObject?: ILanguageObject, shouldCache: boolean = true) => {
     setStatus(ProviderStatus.Loading);
 
     try {
@@ -86,14 +81,17 @@ export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
       // Store new language object in the state if new object exists and
       // shouldCache is true.
       if (newLanguageObject && shouldCache) {
-        setLanguageObjects(prev => ({
-          ...prev,
-          [language]: newLanguageObject,
-        }));
+        setLanguageObjects(
+          previousState =>
+            ({
+              ...previousState,
+              [language]: newLanguageObject,
+            } as { [language: string]: ILanguageObject }),
+        );
       }
     } catch (error) {
       console.error(error);
-      if (typeof onFailed === 'function') onFailed(error);
+      if (onFailed) onFailed(error);
     }
 
     setStatus(ProviderStatus.Loaded);
@@ -106,12 +104,19 @@ export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
   const isLanguageCached = (language: string) => language in languageObjects;
 
   /**
-   * Clears all cached language objects except for the one in use for the
-   * current language.
+   * Clears a cached language object. If no language is provided, clears the
+   * entire cache of language objects.
    */
-  const clearCache = () => {
-    const currentLanguageObject = languageObjects[currentLanguage];
-    setLanguageObjects({ [currentLanguage]: currentLanguageObject });
+  const clearCache = (language?: string) => {
+    if (language) {
+      if (language in languageObjects) {
+        const newState = { ...languageObjects };
+        delete newState[language];
+        setLanguageObjects(newState);
+      }
+    } else {
+      setLanguageObjects({});
+    }
   };
 
   // Provider value
@@ -126,7 +131,7 @@ export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
 
   return (
     <LocalizeContext.Provider value={value}>
-      {status === ProviderStatus.Loaded ? children : loadingComponent}
+      {status === ProviderStatus.Loaded ? children : loadingComponent || null}
     </LocalizeContext.Provider>
   );
 };
