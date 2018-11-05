@@ -22,7 +22,11 @@ localization library to provide a robust localization tool for React projects.
 1. staticTranslate
    - Provides translation functionality outside of React components
 
+---
+
 <details><summary>Table of contents</summary>
+
+---
 
 - [LocalizeProvider](#localizeprovider)
   - [LocalizeProvider Props](#localizeprovider-props)
