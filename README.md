@@ -45,7 +45,7 @@ localization library to provide a robust localization tool for React projects.
     - [Class Component](#class-component)
 - [Localize](#localize)
   - [Localize Props](#localize-props)
-    - [t](#t)
+    - [t](#t-1)
     - [options](#options)
     - [isUpper](#isUpper)
     - [isLower](#isLower)
