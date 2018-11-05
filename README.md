@@ -196,7 +196,7 @@ interface ILocalizeContextValue {
 
 #### Functional Component
 
-```js
+```ts
 import React, { useContext, useEffect } from 'react';
 import { LocalizeContext, Localize } from 'react-localize';
 
@@ -220,7 +220,7 @@ function MyComponent({}) {
 
 #### Class Component
 
-```js
+```ts
 import React, { Component } from 'react';
 import { LocalizeContext, Localize } from 'react-localize';
 
@@ -280,7 +280,7 @@ interface ILocalizeProps {
 
 ### Example Component
 
-```js
+```ts
 // Returns "Hi John" if language is "en" or "Bonjour John" if language is "fr".
 <Localize t="hi_name" options={{ name: 'John' }} />
 ```
@@ -298,7 +298,7 @@ method within Polyglot. For information on how to use this, check the
 [documentation](http://airbnb.io/polyglot.js/). This method can be used as
 follows:
 
-```js
+```ts
 // Returns "Hi John" if language is "en" or "Bonjour John" if language is "fr".
 const translatedPhrase = staticTranslate.t('hi_name', { name: 'John' });
 ```
