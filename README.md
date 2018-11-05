@@ -274,12 +274,12 @@ in the state. However is one important thing to consider: **This will be a
 static translation. It will not update when you update the language using the
 Localize context.**
 
-This method can be used as follows:
+Static translate only exposes the method `t`, which exacly matches the `t`
+method within Polyglot. For information on how to use this, check the
+[documentation](http://airbnb.io/polyglot.js/). This method can be used as
+follows:
 
 ```js
 // Returns "Hi John" if language is "en" or "Bonjour John" if language is "fr".
 const translatedPhrase = staticTranslate.t('hi_name', { name: 'John' });
 ```
-
-The API is exactly the same as Polyglot's. For information on how to use this,
-check the [documentation](http://airbnb.io/polyglot.js/);
