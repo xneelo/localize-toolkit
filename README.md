@@ -278,7 +278,7 @@ This method can be used as follows:
 
 ```js
 // Returns "Hi John" if language is "en" or "Bonjour John" if language is "fr".
-const translatedPhrase = staticTranslate('hi_name', { name: 'John' });
+const translatedPhrase = staticTranslate.t('hi_name', { name: 'John' });
 ```
 
 The API is exactly the same as Polyglot's. For information on how to use this,
