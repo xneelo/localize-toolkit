@@ -3,25 +3,6 @@
 A localization library that uses React's context API and the Polyglot
 localization library to provide a robust localization tool for React projects.
 
-## Features
-
-1. Loading placeholder prop while language is being fetched
-1. Reloading of every translated phrase upon language switch without remounting
-   any components
-1. Language map object cache to avoid repeat fetching
-1. Static localization method for non-React files
-
-## Exported API
-
-1. LocalizeProvider
-   - The provider for the localize context
-1. LocalizeContext
-   - The context for use within Components
-1. Localize
-   - A consumer wrapped in a React component for ease of use
-1. staticTranslate
-   - Provides translation functionality outside of React components
-
 ---
 
 <details><summary>Table of contents</summary>
@@ -57,6 +38,25 @@ localization library to provide a robust localization tool for React projects.
 </details>
 
 ---
+
+## Features
+
+1. Loading placeholder prop while language is being fetched
+1. Reloading of every translated phrase upon language switch without remounting
+   any components
+1. Language map object cache to avoid repeat fetching
+1. Static localization method for non-React files
+
+## Exported API
+
+1. LocalizeProvider
+   - The provider for the localize context
+1. LocalizeContext
+   - The context for use within Components
+1. Localize
+   - A consumer wrapped in a React component for ease of use
+1. staticTranslate
+   - Provides translation functionality outside of React components
 
 ## LocalizeProvider
 
