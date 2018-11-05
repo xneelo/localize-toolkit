@@ -114,7 +114,7 @@ interface ILocalizeProviderProps {
 ReactDom.render(
   <LocalizeProvider
     loadingComponent={<div>{'Loading...'}</div>}
-    getLanguage={getLocalizeObject}
+    getLanguage={getLanguageAPI}
     initLanguage="en"
   >
     <App />
@@ -201,7 +201,7 @@ import React, { useContext, useEffect } from 'react';
 import { LocalizeContext, Localize } from 'react-localize';
 
 function MyComponent({}) {
-  const localize: Localize = useContext(LocalizeContext);
+  const localize = useContext(LocalizeContext);
 
   useEffect(() => {
     localize.setLanguage('en');
@@ -228,12 +228,12 @@ class MyComponent extends Component {
   static contextType = LocalizeContext;
 
   componentDidMount() {
-    const localize: Localize = this.context;
+    const localize = this.context;
     localize.setLanguage('en');
   }
 
   render() {
-    const localize: Localize = this.context;
+    const localize = this.context;
 
     return (
       <>
