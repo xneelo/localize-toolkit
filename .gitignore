@@ -1,0 +1,42 @@
+# dependencies
+/node_modules
+/demo/node_modules
+
+# testing
+/coverage
+/demo/coverage
+
+# sandbox
+/sandbox
+
+# builds
+/demo/build
+/demo/.out
+/demo/out*
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+/demo/.DS_Store
+/demo/.env.local
+/demo/.env.development.local
+/demo/.env.test.local
+/demo/.env.production.local
+
+#logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/demo/npm-debug.log*
+/demo/yarn-debug.log*
+/demo/yarn-error.log*
+
+# idea
+/.idea
+/demo/.idea
+
+# hide npm builds
+lib
