@@ -26,8 +26,6 @@ localization library to provide a robust localization tool for React projects.
 
 <details><summary>Table of contents</summary>
 
----
-
 - [LocalizeProvider](#localizeprovider)
   - [LocalizeProvider Props](#localizeprovider-props)
     - [initLanguage](#initlanguage)
@@ -57,6 +55,8 @@ localization library to provide a robust localization tool for React projects.
 - [staticTranslate](#statictranslate)
 
 </details>
+
+---
 
 ## LocalizeProvider
 
