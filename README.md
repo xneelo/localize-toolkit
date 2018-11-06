@@ -192,7 +192,7 @@ interface ILocalizeContextValue {
 ### Example Use
 
 > Note: See the [Localize Component](#localize) documentation for more
-> information on the use below
+> information on using the JSX component below.
 
 #### Functional Component
 
@@ -207,11 +207,13 @@ function MyComponent({}) {
     localize.setLanguage('en');
   }, []);
 
+  const translateOutsideOfJSX = () => {
+    return localize.t('translate_token');
+  }
+
   return (
     <>
-      {/* Can do either one! */}
-      {localize.t('translate_token')}
-      {/* See Localize Component for information on below. */}
+      {/* See Localize Component for information on this component. */}
       <Localize t={'translate_token'} />
     </>
   );
@@ -231,14 +233,17 @@ class MyComponent extends Component {
     const localize = this.context;
     localize.setLanguage('en');
   }
+  
+  translateOutsideOfJSX() {
+    const localize = this.context;
+    return localize.t('translate_token');
+  }
 
   render() {
     const localize = this.context;
 
     return (
       <>
-        {/* Can do either one! */}
-        {localize.t('translate_token')}
         {/* See Localize Component for information on below. */}
         <Localize t={'translate_token'} />
       </>
