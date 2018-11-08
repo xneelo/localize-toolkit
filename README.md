@@ -1,7 +1,7 @@
 # OPF Localize
 
 A localization library that uses React's context API and the Polyglot
-localization library to provide a robust localization tool for React projects.
+localization library to provide a robust localization tool for React projects. It exposes 4 items: LocalizeProvider, LocalizeContext, Localize and staticTranslate. See the table of contents to jump to a specific item.
 
 ---
 
