@@ -5,7 +5,7 @@ localization library to provide a robust localization tool for React projects.
 
 ---
 
-<details><summary>Exported Members</summary>
+<details><summary>Table of Contents</summary>
 
 1. [LocalizeProvider](#localizeprovider)
    - [LocalizeProvider Props](#localizeprovider-props)
