@@ -2,39 +2,41 @@
 
 A localization library that uses React's context API and the Polyglot
 localization library to provide a robust localization tool for React projects.
+It exposes 4 items: LocalizeProvider, LocalizeContext, Localize and
+staticTranslate. See the table of contents to jump to a specific item.
 
 ---
 
-<details><summary>Table of contents</summary>
+<details><summary>Table of Contents</summary>
 
-- [LocalizeProvider](#localizeprovider)
-  - [LocalizeProvider Props](#localizeprovider-props)
-    - [initLanguage](#initlanguage)
-    - [initialPhrases](#initialphrases)
-    - [getPhrases](#getphrases)
-    - [onFailed](#onfailed)
-    - [loadingComponent](#loadingcomponent)
-    - [cachePhrases](#cachephrases)
-  - [Example Initialization](#example-initialization)
-- [LocalizeContext](#localizecontext)
-  - [LocalizeContext API](#localizecontext-api)
-    - [t](#t)
-    - [setLanguage](#setlanguage)
-    - [isLanguageCached](#islanguagecached)
-    - [clearCache](#clearcache)
-    - [currentLanguage](#currentlanguage)
-    - [isLoaded](#isloaded)
-  - [Example Use](#example-use)
-    - [Functional Component](#functional-component)
-    - [Class Component](#class-component)
-- [Localize](#localize)
-  - [Localize Props](#localize-props)
-    - [t](#t-1)
-    - [options](#options)
-    - [isUpper](#isUpper)
-    - [isLower](#isLower)
-  - [Example Component](#example-component)
-- [staticTranslate](#statictranslate)
+1. [LocalizeProvider](#localizeprovider)
+   - [LocalizeProvider Props](#localizeprovider-props)
+     - [initLanguage](#initlanguage)
+     - [initialPhrases](#initialphrases)
+     - [getPhrases](#getphrases)
+     - [onFailed](#onfailed)
+     - [loadingComponent](#loadingcomponent)
+     - [cachePhrases](#cachephrases)
+   - [Example Initialization](#example-initialization)
+2. [LocalizeContext](#localizecontext)
+   - [LocalizeContext API](#localizecontext-api)
+     - [t](#t)
+     - [setLanguage](#setlanguage)
+     - [isLanguageCached](#islanguagecached)
+     - [clearCache](#clearcache)
+     - [currentLanguage](#currentlanguage)
+     - [isLoaded](#isloaded)
+   - [Example Use](#example-use)
+     - [Functional Component](#functional-component)
+     - [Class Component](#class-component)
+3. [Localize](#localize)
+   - [Localize Props](#localize-props)
+     - [t](#t-1)
+     - [options](#options)
+     - [isUpper](#isupper)
+     - [isLower](#islower)
+   - [Example Component](#example-component)
+4. [staticTranslate](#statictranslate)
 
 </details>
 
@@ -47,17 +49,6 @@ localization library to provide a robust localization tool for React projects.
    any components
 1. Caching phrases to avoid repeat fetching
 1. Static localization method for non-React files
-
-**Exported Members**:
-
-1. **LocalizeProvider**
-   - The provider for the localize context
-1. **LocalizeContext**
-   - The context for use within Components
-1. **Localize**
-   - A consumer wrapped in a React component for ease of use
-1. **staticTranslate**
-   - Provides translation functionality outside of React components
 
 ## LocalizeProvider
 
