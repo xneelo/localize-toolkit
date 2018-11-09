@@ -6,49 +6,51 @@ enum ProviderStatus {
   Loaded = 'loaded',
 }
 
-export interface ILanguageObject {
-  [phrase: string]: string | ILanguageObject;
+export interface IPhrases {
+  [phrase: string]: string | IPhrases;
 }
 
 export interface ILocalizeProviderProps {
   initLanguage?: string;
-  initLanguageObject?: ILanguageObject;
-  getLanguage?: (language: string) => ILanguageObject;
+  initialPhrases?: IPhrases;
+  getPhrases?: (language: string) => IPhrases;
   onFailed?: (error: Error) => any;
   loadingComponent?: React.ReactNode;
+  cachePhrases?: boolean;
 }
 
 export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
   children,
   initLanguage,
-  initLanguageObject,
-  getLanguage,
+  initialPhrases,
+  getPhrases,
   onFailed,
   loadingComponent,
+  cachePhrases,
 }) => {
   const [currentLanguage, setCurrentLanguage] = React.useState<string>('');
 
-  const [languageObjects, setLanguageObjects] = React.useState<{ [language: string]: ILanguageObject }>({});
+  const [languageObjects, setLanguageObjects] = React.useState<{
+    [language: string]: IPhrases;
+  }>({});
 
   const [status, setStatus] = React.useState<ProviderStatus>(ProviderStatus.Loading);
 
   React.useEffect(() => {
     if (!currentLanguage && initLanguage) {
-      setLanguage(initLanguage, initLanguageObject);
+      setLanguage(initLanguage, initialPhrases);
     }
   }, []);
 
   /**
    * Set the current language, and provide an optional language object. If no
    * language object is provided, will attempt to fetch language using language
-   * token from provided getLanguage API.
+   * token from provided getPhrases API.
    * @param language Language token (example: 'en').
    * @param languageObject Optional. Object of
    * localize token maps for the language.
-   * @param shouldCache Optional. Should cache the resulting language
-   * object for future reference.
    */
-  const setLanguage = async (language: string, languageObject?: ILanguageObject, shouldCache: boolean = true) => {
+  const setLanguage = async (language: string, languageObject?: IPhrases) => {
     setStatus(ProviderStatus.Loading);
 
     try {
@@ -56,15 +58,15 @@ export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
       // null. If new language object is not defined at this step, and there is
       // no cache for the language, then this statement will throw and the
       // language will not be set (no language object available).
-      let newLanguageObject: ILanguageObject | null = null;
+      let newLanguageObject: IPhrases | null = null;
       if (languageObject) {
         newLanguageObject = languageObject;
-      } else if (!isLanguageCached(language) && getLanguage) {
-        newLanguageObject = await getLanguage(language);
+      } else if (!isLanguageCached(language) && getPhrases) {
+        newLanguageObject = await getPhrases(language);
       } else if (!isLanguageCached(language)) {
         throw new Error(
           `No language object provided, language ${language} is not cached, ` +
-            `and no getLanguage function is provided.`,
+            `and no getPhrases function is provided.`,
         );
       }
 
@@ -79,14 +81,14 @@ export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
       localizePolyglot.locale(language);
 
       // Store new language object in the state if new object exists and
-      // shouldCache is true.
-      if (newLanguageObject && shouldCache) {
+      // cache phrases is true.
+      if (newLanguageObject && cachePhrases) {
         setLanguageObjects(
           previousState =>
             ({
               ...previousState,
               [language]: newLanguageObject,
-            } as { [language: string]: ILanguageObject }),
+            } as { [language: string]: IPhrases }),
         );
       }
     } catch (error) {

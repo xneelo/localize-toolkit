@@ -10,10 +10,11 @@ localization library to provide a robust localization tool for React projects.
 - [LocalizeProvider](#localizeprovider)
   - [LocalizeProvider Props](#localizeprovider-props)
     - [initLanguage](#initlanguage)
-    - [initLanguageObject](#initlanguageobject)
-    - [getLanguage](#getlanguage)
+    - [initialPhrases](#initialphrases)
+    - [getPhrases](#getphrases)
     - [onFailed](#onfailed)
     - [loadingComponent](#loadingcomponent)
+    - [cachePhrases](#cachephrases)
   - [Example Initialization](#example-initialization)
 - [LocalizeContext](#localizecontext)
   - [LocalizeContext API](#localizecontext-api)
@@ -41,10 +42,10 @@ localization library to provide a robust localization tool for React projects.
 
 **Features**:
 
-1. Loading placeholder prop while language is being fetched
+1. Loading placeholder prop while phrases are being fetched
 1. Reloading of every translated phrase upon language switch without remounting
    any components
-1. Language map object cache to avoid repeat fetching
+1. Caching phrases to avoid repeat fetching
 1. Static localization method for non-React files
 
 **Exported Members**:
@@ -69,8 +70,8 @@ component.
 ```ts
 interface ILocalizeProviderProps {
   initLanguage?: string;
-  initLanguageObject?: ILanguageObject;
-  getLanguage?: (language: string) => ILanguageObject;
+  initialPhrases?: IPhrases;
+  getPhrases?: (language: string) => IPhrases;
   onFailed?: (error: Error) => any;
   loadingComponent?: React.ReactNode;
 }
@@ -79,26 +80,26 @@ interface ILocalizeProviderProps {
 #### initLanguage
 
 - Provide the initial language string. If used with
-  [initLanguageObject](#initlanguageobject), will set language and use the
-  object for mapping phrases. Otherwise, will call [getLanguage](#getlanguage)
-  API endpoint if provided.
+  [initialPhrases](#initialphrases), will set language and use the object
+  provided to map phrases. Otherwise, will call [getPhrases](#getphrases) API
+  endpoint if provided.
 
-#### initLanguageObject
+#### initialPhrases
 
 - If [initLanguage](#initlanguage) is provided, this prop can be given to
-  provide a language object for mapping phrases. Otherwise an API call to
-  [getLanguage](#getlanguage) will be made with the initial language.
+  provide a phrases object. Otherwise an API call to [getPhrases](#getphrases)
+  will be made with the initial language.
 
-#### getLanguage
+#### getPhrases
 
 - Provide this prop to give an API endpoint that can be called with language.
-  This should return a language object for mapping phrases.
+  This should return a phrases object.
 
 #### onFailed
 
 - Callback for when switching a language fails. This could be caused by
-  [getLanguage](#getlanguage) failing, or by attempting to switch when
-  [getLanguage](#getlanguage) is not provided and no language object is cached.
+  [getPhrases](#getphrases) failing, or by attempting to switch when
+  [getPhrases](#getphrases) is not provided and no phrases are cached.
 
 #### loadingComponent
 
@@ -108,14 +109,20 @@ interface ILocalizeProviderProps {
   when provided a language object, this will not be rendered as the switch will
   be immediate.
 
+#### cachePhrases
+
+- By default, this is false. If set to true, any given or fetched phrases will
+  be cached within the provider.
+
 ### Example Initialization
 
 ```ts
 ReactDom.render(
   <LocalizeProvider
     loadingComponent={<div>{'Loading...'}</div>}
-    getLanguage={getLanguageAPI}
+    getPhrases={getLanguageAPI}
     initLanguage="en"
+    cachePhrases
   >
     <App />
   </LocalizeProvider>,
@@ -130,50 +137,39 @@ Context.
 
 ### LocalizeContext API
 
+<!-- prettier-ignore -->
 ```ts
 interface ILocalizeContextValue {
-  setLanguage?: (
-    language: string,
-    languageObject?: ILanguageObject,
-    shouldCache?: boolean,
-  ) => Promise<void>;
-
+  setLanguage?: (language: string, languageObject?: IPhrases) => Promise<void>;
   isLanguageCached?: (language: string) => boolean;
-
   clearCache?: (language?: string) => void;
-
   currentLanguage?: string;
-
   isLoaded?: boolean;
-
   t?(phrase: string): string;
   t?(phrase: string, smartCount: number): string;
-  t?(
-    phrase: string,
-    interpolationOptions: Polyglot.InterpolationOptions,
-  ): string;
+  t?(phrase: string, interpolationOptions: Polyglot.InterpolationOptions): string;
 }
 ```
 
 #### setLanguage
 
 - Call this method to set the language. You must provide a language string (ex:
-  'en'), and can optionally provide the corresponding language object.
-  Additionally, you can specify whether or not to cache the language object for
-  future use. If the language is not cached and no language object is provided,
-  [getLanguage](#getlanguage) will be called to get the language object for the
-  provided language.
+  'en'), and can optionally provide the corresponding language object. If the
+  language is not previously cached and no language object is provided,
+  [getPhrases](#getphrases) will be called to get the language object for the
+  provided language. If [getPhrases](#getphrases) is not provided,
+  [onFailed](#onfailed) will be called as there is no way to set the language.
 
 #### isLanguageCached
 
-- Check if there is a cached language object for a given language string. This
-  can be called before [setLanguage](#setlanguage) in order to check whether you
-  will have to provide a language object.
+- Check if there are cached phrases for a given language string. This can be
+  called before [setLanguage](#setlanguage) in order to check whether you will
+  have to provide a phrases object.
 
 #### clearCache
 
-- Clears a provided language from the cache if it exists. If no language is
-  provided, this method clears all languages from the cache.
+- Clears a phrases object for the provided language from the cache if it exists.
+  If no language is provided, this method clears all phrases from the cache.
 
 #### currentLanguage
 
@@ -182,7 +178,7 @@ interface ILocalizeContextValue {
 #### isLoaded
 
 - Returns true if language is loaded, false if it is currently fetching a
-  language object from the [getLanguage](#getlanguage) API method.
+  phrases object from the [getPhrases](#getphrases) API method.
 
 #### t
 
@@ -209,7 +205,7 @@ function MyComponent({}) {
 
   const translateOutsideOfJSX = () => {
     return localize.t('translate_token');
-  }
+  };
 
   return (
     <>
@@ -233,7 +229,7 @@ class MyComponent extends Component {
     const localize = this.context;
     localize.setLanguage('en');
   }
-  
+
   translateOutsideOfJSX() {
     const localize = this.context;
     return localize.t('translate_token');

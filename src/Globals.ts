@@ -1,11 +1,11 @@
 import * as React from 'react';
 import * as Polyglot from 'node-polyglot';
-import { ILanguageObject } from './LocalizeProvider';
+import { IPhrases } from './LocalizeProvider';
 
 // Types
 
 export interface ILocalizeContextValue {
-  setLanguage?: (language: string, languageObject?: ILanguageObject, shouldCache?: boolean) => Promise<void>;
+  setLanguage?: (language: string, languageObject?: IPhrases, shouldCache?: boolean) => Promise<void>;
   isLanguageCached?: (language: string) => boolean;
   clearCache?: (language?: string) => void;
   currentLanguage?: string;
