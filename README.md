@@ -65,7 +65,6 @@ specific item within these.
 4. [staticTranslate](#statictranslate)
 
 </details>
-<br />
 
 ## LocalizeProvider
 
