@@ -88,41 +88,41 @@ interface ILocalizeProviderProps {
 
 #### `initialLanguage`
 
-Provide the initial language string. If used with
-[initialPhrases](#initialphrases), will set language and use the object provided
-to map phrases. Otherwise, will call [getPhrases](#getphrases) API endpoint if
-provided.
+- Provide the initial language string. If used with
+  [initialPhrases](#initialphrases), will set language and use the object
+  provided to map phrases. Otherwise, will call [getPhrases](#getphrases) API
+  endpoint if provided.
 
 #### `initialPhrases`
 
-If [initialLanguage](#initiallanguage) is provided, this prop can be given to
-provide a phrases object. Otherwise an API call to [getPhrases](#getphrases)
-will be made with the initial language.
+- If [initialLanguage](#initiallanguage) is provided, this prop can be given to
+  provide a phrases object. Otherwise an API call to [getPhrases](#getphrases)
+  will be made with the initial language.
 
 #### `getPhrases`
 
-Provide this prop to give an API endpoint that can be called with language. This
-should return a phrases object.
+- Provide this prop to give an API endpoint that can be called with language.
+  This should return a phrases object.
 
 #### `onFailed`
 
-Callback for when switching a language fails. This could be caused by
-[getPhrases](#getphrases) failing, or by attempting to switch when
-[getPhrases](#getphrases) is not provided and no phrases are cached.
+- Callback for when switching a language fails. This could be caused by
+  [getPhrases](#getphrases) failing, or by attempting to switch when
+  [getPhrases](#getphrases) is not provided and no phrases are cached.
 
 #### `loadingComponent`
 
-Provide a component to be rendered while a language object is loading. This will
-be rendered any time phrases have to be fetched. If the phrases are cached, or
-when provided a phrases object, this will not be rendered as the switch will be
-immediate.
+- Provide a component to be rendered while a language object is loading. This
+  will be rendered any time phrases have to be fetched. If the phrases are
+  cached, or when provided a phrases object, this will not be rendered as the
+  switch will be immediate.
 
 #### `noCache`
 
-By default, this is false. If set to true, none of the given or fetched phrases
-will be cached within the provider. Any subsequent attempts to switch to these
-languages will require a new phrases object be provided, or will make a call to
-[getPhrases](#getphrases).
+- By default, this is false. If set to true, none of the given or fetched
+  phrases will be cached within the provider. Any subsequent attempts to switch
+  to these languages will require a new phrases object be provided, or will make
+  a call to [getPhrases](#getphrases).
 
 ### Example Initialization
 
@@ -165,37 +165,37 @@ interface ILocalizeContextValue {
 
 #### `setLanguage`
 
-Call this method to set the language. You must provide a language string (ex:
-'en'), and can optionally provide the corresponding language object. If the
-language is not previously cached and no language object is provided,
-[getPhrases](#getphrases) will be called to get the language object for the
-provided language. If [getPhrases](#getphrases) is not provided,
-[onFailed](#onfailed) will be called as there is no way to set the language.
+- Call this method to set the language. You must provide a language string (ex:
+  'en'), and can optionally provide the corresponding language object. If the
+  language is not previously cached and no language object is provided,
+  [getPhrases](#getphrases) will be called to get the language object for the
+  provided language. If [getPhrases](#getphrases) is not provided,
+  [onFailed](#onfailed) will be called as there is no way to set the language.
 
 #### `isLanguageCached`
 
-Check if there are cached phrases for a given language string. This can be
-called before [setLanguage](#setlanguage) in order to check whether you will
-have to provide a phrases object.
+- Check if there are cached phrases for a given language string. This can be
+  called before [setLanguage](#setlanguage) in order to check whether you will
+  have to provide a phrases object.
 
 #### `clearCache`
 
-Clears a phrases object for the provided language from the cache if it exists.
-If no language is provided, this method clears all phrases from the cache.
+- Clears a phrases object for the provided language from the cache if it exists.
+  If no language is provided, this method clears all phrases from the cache.
 
 #### `currentLanguage`
 
-Returns the current language string.
+- Returns the current language string.
 
 #### `isLoaded`
 
-Returns true if language is loaded, false if it is currently fetching a phrases
-object from the [getPhrases](#getphrases) API method.
+- Returns true if language is loaded, false if it is currently fetching a
+  phrases object from the [getPhrases](#getphrases) API method.
 
 #### `t`
 
-This is the Polyglot `t` method. For information on how to use this, check the
-[documentation](http://airbnb.io/polyglot.js/);
+- This is the Polyglot `t` method. For information on how to use this, check the
+  [documentation](http://airbnb.io/polyglot.js/);
 
 ### Example Use
 
@@ -277,21 +277,21 @@ interface ILocalizeProps {
 
 #### `t`
 
-The phrase you wish to translate.
+- The language phrase you wish to translate.
 
 #### `options`
 
-Any options for the translated phrase. This acts the same as a second argument
-given to Polyglot. For information on how to use this, check the
-[documentation](http://airbnb.io/polyglot.js/);
+- Any options for the translated phrase. This acts the same as a second argument
+  given to Polyglot. For information on how to use this, check the
+  [documentation](http://airbnb.io/polyglot.js/);
 
 #### `isUpper`
 
-Transform entire returned phrase to uppercase.
+- Transform entire returned phrase to uppercase.
 
 #### `isLower`
 
-Transform entire returned phrase to lowercase.
+- Transform entire returned phrase to lowercase.
 
 ### Example Component
 
