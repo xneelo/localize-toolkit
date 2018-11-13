@@ -1,4 +1,4 @@
-# React Localize Toolkit
+# Localize Toolkit
 
 A localization library that uses React's context API and the Polyglot
 localization library to provide robust localization tools for React projects.
