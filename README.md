@@ -13,7 +13,7 @@ specific item within these.
 
 1. [LocalizeProvider](#localizeprovider)
    - [LocalizeProvider Props](#localizeprovider-props)
-     - [initLanguage](#initlanguage)
+     - [initialLanguage](#initiallanguage)
      - [initialPhrases](#initialphrases)
      - [getPhrases](#getphrases)
      - [onFailed](#onfailed)
@@ -52,6 +52,23 @@ specific item within these.
 1. Caching phrases to avoid repeat fetching
 1. Static localization method for non-React files
 
+**Dependencies**:
+
+1.  This package requires version `> 16.7.0` of `react` and `react-dom`, as it
+    uses the Hooks API.
+1.  This package has a dependency on `node-polyglot`. You may have some issues
+    with typing, as some of the types of this project are sourced from
+    `@types/node-polyglot`. If this is an issue, you can install this as a dev
+    dependency as follows:
+
+    ```sh
+    # yarn
+    yarn add @types/node-polyglot -D
+
+    # npm
+    npm i @types/node-polyglot -D
+    ```
+
 ## LocalizeProvider
 
 Localize provider contains the core functionality, and provides localize methods
@@ -62,7 +79,7 @@ component.
 
 ```ts
 interface ILocalizeProviderProps {
-  initLanguage?: string;
+  initialLanguage?: string;
   initialPhrases?: IPhrases;
   getPhrases?: (language: string) => IPhrases;
   onFailed?: (error: Error) => any;
@@ -70,7 +87,7 @@ interface ILocalizeProviderProps {
 }
 ```
 
-#### initLanguage
+#### initialLanguage
 
 - Provide the initial language string. If used with
   [initialPhrases](#initialphrases), will set language and use the object
@@ -79,7 +96,7 @@ interface ILocalizeProviderProps {
 
 #### initialPhrases
 
-- If [initLanguage](#initlanguage) is provided, this prop can be given to
+- If [initialLanguage](#initiallanguage) is provided, this prop can be given to
   provide a phrases object. Otherwise an API call to [getPhrases](#getphrases)
   will be made with the initial language.
 
@@ -114,7 +131,7 @@ ReactDom.render(
   <LocalizeProvider
     loadingComponent={<div>{'Loading...'}</div>}
     getPhrases={getLanguageAPI}
-    initLanguage="en"
+    initialLanguage="en"
     cachePhrases
   >
     <App />
