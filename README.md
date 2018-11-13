@@ -28,7 +28,7 @@ localization library to provide robust localization tools for React projects.
     npm i @types/node-polyglot -D
     ```
 
-It exposes 4 items: [LocalizeProvider](#localizeprovider),
+The toolkit exposes 4 items: [LocalizeProvider](#localizeprovider),
 [LocalizeContext](#localizecontext), [Localize](#localize) and
 [staticTranslate](#statictranslate). Expand the table of contents to jump to a
 specific item within these.
