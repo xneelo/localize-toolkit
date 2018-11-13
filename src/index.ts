@@ -9,8 +9,8 @@ export {
   Localize,
   staticTranslate,
   // Types
-  IStaticTranslate,
-  IPhrases,
   ILocalizeProviderProps,
+  IPhrases,
   ILocalizeProps,
+  IStaticTranslate,
 };

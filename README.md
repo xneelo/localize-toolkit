@@ -2,8 +2,10 @@
 
 A localization library that uses React's context API and the Polyglot
 localization library to provide a robust localization tool for React projects.
-It exposes 4 items: LocalizeProvider, LocalizeContext, Localize and
-staticTranslate. See the table of contents to jump to a specific item.
+It exposes 4 items: [LocalizeProvider](#localizeprovider),
+[LocalizeContext](#localizecontext), [Localize](#localize) and
+[staticTranslate](#statictranslate). Expand the table of contents to jump to a
+specific item within these.
 
 ---
 
@@ -278,6 +280,12 @@ interface ILocalizeProps {
 ```
 
 ## staticTranslate
+
+> Note: This should **only** be used in cases where you are unable to use the
+> context components. This would most likely be outside of React, such as inside
+> of a Redux reducer. If you are using this inside a React file, you can
+> probably use [LocalizeContext](#localizecontext) or [Localize](#localize)
+> instead.
 
 You can call static translate in order to translate a phrase outside of React.
 For example, you can use it for translating something within Redux to be stored
