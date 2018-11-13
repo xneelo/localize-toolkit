@@ -4,8 +4,10 @@
   "main": "lib/index.js",
   "typing": "lib/index.d.ts",
   "author": "Liam Ross",
-  "license": "None",
-  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
   "devDependencies": {
     "@types/node-polyglot": "^0.4.31",
     "@types/react": "^16.4.18",
@@ -19,7 +21,9 @@
   },
   "dependencies": {
     "node-polyglot": "^2.3.0",
-    "react": "^16.7.0-alpha.0",
+    "react": "^16.7.0-alpha.0"
+  },
+  "peerDependencies": {
     "react-dom": "^16.7.0-alpha.0"
   }
 }
