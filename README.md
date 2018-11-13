@@ -1,7 +1,33 @@
-# OPF Localize
+# React Localize Toolkit
 
 A localization library that uses React's context API and the Polyglot
-localization library to provide a robust localization tool for React projects.
+localization library to provide robust localization tools for React projects.
+
+**Features**:
+
+1. Loading placeholder prop while phrases are being fetched
+1. Reloading of every translated phrase upon language switch without remounting
+   any components
+1. Caching phrases to avoid repeat fetching
+1. Static localization method for non-React files
+
+**Dependencies**:
+
+1.  This package requires version `> 16.7.0` of `react` and `react-dom`, as it
+    uses the Hooks API.
+1.  This package has a dependency on `node-polyglot`. You may have some issues
+    with typing, as some of the types of this project are sourced from
+    `@types/node-polyglot`. If this is an issue, you can install this as a dev
+    dependency as follows:
+
+    ```sh
+    # yarn
+    yarn add @types/node-polyglot -D
+
+    # npm
+    npm i @types/node-polyglot -D
+    ```
+
 It exposes 4 items: [LocalizeProvider](#localizeprovider),
 [LocalizeContext](#localizecontext), [Localize](#localize) and
 [staticTranslate](#statictranslate). Expand the table of contents to jump to a
@@ -40,31 +66,6 @@ specific item within these.
 
 </details>
 <br />
-
-**Features**:
-
-1. Loading placeholder prop while phrases are being fetched
-1. Reloading of every translated phrase upon language switch without remounting
-   any components
-1. Caching phrases to avoid repeat fetching
-1. Static localization method for non-React files
-
-**Dependencies**:
-
-1.  This package requires version `> 16.7.0` of `react` and `react-dom`, as it
-    uses the Hooks API.
-1.  This package has a dependency on `node-polyglot`. You may have some issues
-    with typing, as some of the types of this project are sourced from
-    `@types/node-polyglot`. If this is an issue, you can install this as a dev
-    dependency as follows:
-
-    ```sh
-    # yarn
-    yarn add @types/node-polyglot -D
-
-    # npm
-    npm i @types/node-polyglot -D
-    ```
 
 ## LocalizeProvider
 
