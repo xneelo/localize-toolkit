@@ -33,7 +33,7 @@ It exposes 4 items: [LocalizeProvider](#localizeprovider),
 [staticTranslate](#statictranslate). Expand the table of contents to jump to a
 specific item within these.
 
-<details><summary>Table of Contents</summary>
+<details><summary><b>Table of Contents</b></summary>
 
 1. [LocalizeProvider](#localizeprovider)
    - [LocalizeProvider Props](#localizeprovider-props)
