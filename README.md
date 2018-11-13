@@ -42,7 +42,7 @@ specific item within these.
      - [getPhrases](#getphrases)
      - [onFailed](#onfailed)
      - [loadingComponent](#loadingcomponent)
-     - [cachePhrases](#cachephrases)
+     - [noCache](#nocache)
    - [Example Initialization](#example-initialization)
 2. [LocalizeContext](#localizecontext)
    - [LocalizeContext API](#localizecontext-api)
@@ -111,15 +111,16 @@ interface ILocalizeProviderProps {
 #### loadingComponent
 
 - Provide a component to be rendered while a language object is loading. This
-  will be rendered when the initial language object is loading, as well as any
-  time the language is switched. If you are switching to a cached language, or
-  when provided a language object, this will not be rendered as the switch will
-  be immediate.
+  will be rendered any time phrases have to be fetched. If the phrases are
+  cached, or when provided a phrases object, this will not be rendered as the
+  switch will be immediate.
 
-#### cachePhrases
+#### noCache
 
-- By default, this is false. If set to true, any given or fetched phrases will
-  be cached within the provider.
+- By default, this is false. If set to true, none of the given or fetched
+  phrases will be cached within the provider. Any subsequent attempts to switch
+  to these languages will require a new phrases object be provided, or will make
+  a call to [getPhrases](#getphrases).
 
 ### Example Initialization
 
