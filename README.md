@@ -66,6 +66,8 @@ specific item within these.
 
 </details>
 
+<br />
+
 ## LocalizeProvider
 
 Localize provider contains the core functionality, and provides localize methods
@@ -84,38 +86,38 @@ interface ILocalizeProviderProps {
 }
 ```
 
-#### initialLanguage
+#### `initialLanguage`
 
 - Provide the initial language string. If used with
   [initialPhrases](#initialphrases), will set language and use the object
   provided to map phrases. Otherwise, will call [getPhrases](#getphrases) API
   endpoint if provided.
 
-#### initialPhrases
+#### `initialPhrases`
 
 - If [initialLanguage](#initiallanguage) is provided, this prop can be given to
   provide a phrases object. Otherwise an API call to [getPhrases](#getphrases)
   will be made with the initial language.
 
-#### getPhrases
+#### `getPhrases`
 
 - Provide this prop to give an API endpoint that can be called with language.
   This should return a phrases object.
 
-#### onFailed
+#### `onFailed`
 
 - Callback for when switching a language fails. This could be caused by
   [getPhrases](#getphrases) failing, or by attempting to switch when
   [getPhrases](#getphrases) is not provided and no phrases are cached.
 
-#### loadingComponent
+#### `loadingComponent`
 
 - Provide a component to be rendered while a language object is loading. This
   will be rendered any time phrases have to be fetched. If the phrases are
   cached, or when provided a phrases object, this will not be rendered as the
   switch will be immediate.
 
-#### noCache
+#### `noCache`
 
 - By default, this is false. If set to true, none of the given or fetched
   phrases will be cached within the provider. Any subsequent attempts to switch
@@ -138,6 +140,8 @@ ReactDom.render(
 );
 ```
 
+<br />
+
 ## LocalizeContext
 
 All methods for localization and updating the Provider are accessed through this
@@ -159,7 +163,7 @@ interface ILocalizeContextValue {
 }
 ```
 
-#### setLanguage
+#### `setLanguage`
 
 - Call this method to set the language. You must provide a language string (ex:
   'en'), and can optionally provide the corresponding language object. If the
@@ -168,27 +172,27 @@ interface ILocalizeContextValue {
   provided language. If [getPhrases](#getphrases) is not provided,
   [onFailed](#onfailed) will be called as there is no way to set the language.
 
-#### isLanguageCached
+#### `isLanguageCached`
 
 - Check if there are cached phrases for a given language string. This can be
   called before [setLanguage](#setlanguage) in order to check whether you will
   have to provide a phrases object.
 
-#### clearCache
+#### `clearCache`
 
 - Clears a phrases object for the provided language from the cache if it exists.
   If no language is provided, this method clears all phrases from the cache.
 
-#### currentLanguage
+#### `currentLanguage`
 
 - Returns the current language string.
 
-#### isLoaded
+#### `isLoaded`
 
 - Returns true if language is loaded, false if it is currently fetching a
   phrases object from the [getPhrases](#getphrases) API method.
 
-#### t
+#### `t`
 
 - This is the Polyglot `t` method. For information on how to use this, check the
   [documentation](http://airbnb.io/polyglot.js/);
@@ -256,6 +260,8 @@ class MyComponent extends Component {
 }
 ```
 
+<br />
+
 ## Localize
 
 ### Localize Props
@@ -269,21 +275,21 @@ interface ILocalizeProps {
 }
 ```
 
-#### t
+#### `t`
 
 - The language phrase you wish to translate.
 
-#### options
+#### `options`
 
 - Any options for the translated phrase. This acts the same as a second argument
   given to Polyglot. For information on how to use this, check the
   [documentation](http://airbnb.io/polyglot.js/);
 
-#### isUpper
+#### `isUpper`
 
 - Transform entire returned phrase to uppercase.
 
-#### isLower
+#### `isLower`
 
 - Transform entire returned phrase to lowercase.
 
@@ -293,6 +299,8 @@ interface ILocalizeProps {
 // Returns "Hi John" if language is "en" or "Bonjour John" if language is "fr".
 <Localize t="hi_name" options={{ name: 'John' }} />
 ```
+
+<br />
 
 ## staticTranslate
 
