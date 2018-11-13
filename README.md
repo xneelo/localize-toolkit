@@ -18,7 +18,7 @@ localization library to provide robust localization tools for React projects.
 1.  This package has a dependency on `node-polyglot`. You may have some issues
     with typing, as some of the types of this project are sourced from
     `@types/node-polyglot`. If this is an issue, you can install this as a dev
-    dependency:
+    dependency as follows:
 
     ```sh
     # yarn
@@ -66,7 +66,7 @@ specific item within these.
 
 </details>
 
-# LocalizeProvider
+## LocalizeProvider
 
 Localize provider contains the core functionality, and provides localize methods
 to both the [LocalizeContext](#localizecontext) and the [Localize](#localize)
@@ -138,7 +138,7 @@ ReactDom.render(
 );
 ```
 
-# LocalizeContext
+## LocalizeContext
 
 All methods for localization and updating the Provider are accessed through this
 Context.
@@ -256,7 +256,7 @@ class MyComponent extends Component {
 }
 ```
 
-# Localize
+## Localize
 
 ### Localize Props
 
@@ -294,7 +294,7 @@ interface ILocalizeProps {
 <Localize t="hi_name" options={{ name: 'John' }} />
 ```
 
-# staticTranslate
+## staticTranslate
 
 > Note: This should **only** be used in cases where you are unable to use the
 > context components. This would most likely be outside of React, such as inside
