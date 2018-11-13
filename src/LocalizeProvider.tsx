@@ -16,7 +16,7 @@ export interface ILocalizeProviderProps {
   getPhrases?: ((language: string) => IPhrases);
   onFailed?: ((error: Error) => any);
   loadingComponent?: React.ReactNode;
-  cachePhrases?: boolean;
+  noCache?: boolean;
 }
 
 export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
@@ -26,7 +26,7 @@ export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
   getPhrases,
   onFailed,
   loadingComponent,
-  cachePhrases,
+  noCache,
 }) => {
   // The current localization language.
   const [currentLanguage, setCurrentLanguage] = React.useState<string>('');
@@ -78,8 +78,8 @@ export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
       localizePolyglot.locale(language);
 
       // Store new language object in the state if new object exists and
-      // cache phrases is true.
-      if (newLanguageObject && cachePhrases) {
+      // no cache is false.
+      if (newLanguageObject && !noCache) {
         setPhrases(
           previousState =>
             ({

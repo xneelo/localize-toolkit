@@ -1,48 +1,7 @@
-# OPF Localize
+# Localize Toolkit
 
 A localization library that uses React's context API and the Polyglot
-localization library to provide a robust localization tool for React projects.
-It exposes 4 items: [LocalizeProvider](#localizeprovider),
-[LocalizeContext](#localizecontext), [Localize](#localize) and
-[staticTranslate](#statictranslate). Expand the table of contents to jump to a
-specific item within these.
-
----
-
-<details><summary>Table of Contents</summary>
-
-1. [LocalizeProvider](#localizeprovider)
-   - [LocalizeProvider Props](#localizeprovider-props)
-     - [initialLanguage](#initiallanguage)
-     - [initialPhrases](#initialphrases)
-     - [getPhrases](#getphrases)
-     - [onFailed](#onfailed)
-     - [loadingComponent](#loadingcomponent)
-     - [cachePhrases](#cachephrases)
-   - [Example Initialization](#example-initialization)
-2. [LocalizeContext](#localizecontext)
-   - [LocalizeContext API](#localizecontext-api)
-     - [t](#t)
-     - [setLanguage](#setlanguage)
-     - [isLanguageCached](#islanguagecached)
-     - [clearCache](#clearcache)
-     - [currentLanguage](#currentlanguage)
-     - [isLoaded](#isloaded)
-   - [Example Use](#example-use)
-     - [Functional Component](#functional-component)
-     - [Class Component](#class-component)
-3. [Localize](#localize)
-   - [Localize Props](#localize-props)
-     - [t](#t-1)
-     - [options](#options)
-     - [isUpper](#isupper)
-     - [isLower](#islower)
-   - [Example Component](#example-component)
-4. [staticTranslate](#statictranslate)
-
-</details>
-
----
+localization library to provide robust localization tools for React projects.
 
 **Features**:
 
@@ -68,6 +27,44 @@ specific item within these.
     # npm
     npm i @types/node-polyglot -D
     ```
+
+The toolkit exposes 4 items: [LocalizeProvider](#localizeprovider),
+[LocalizeContext](#localizecontext), [Localize](#localize) and
+[staticTranslate](#statictranslate). Expand the table of contents to jump to a
+specific item within these.
+
+<details><summary><b>Table of Contents</b></summary>
+
+1. [LocalizeProvider](#localizeprovider)
+   - [LocalizeProvider Props](#localizeprovider-props)
+     - [initialLanguage](#initiallanguage)
+     - [initialPhrases](#initialphrases)
+     - [getPhrases](#getphrases)
+     - [onFailed](#onfailed)
+     - [loadingComponent](#loadingcomponent)
+     - [noCache](#nocache)
+   - [Example Initialization](#example-initialization)
+2. [LocalizeContext](#localizecontext)
+   - [LocalizeContext API](#localizecontext-api)
+     - [t](#t)
+     - [setLanguage](#setlanguage)
+     - [isLanguageCached](#islanguagecached)
+     - [clearCache](#clearcache)
+     - [currentLanguage](#currentlanguage)
+     - [isLoaded](#isloaded)
+   - [Example Use](#example-use)
+     - [Functional Component](#functional-component)
+     - [Class Component](#class-component)
+3. [Localize](#localize)
+   - [Localize Props](#localize-props)
+     - [t](#t-1)
+     - [options](#options)
+     - [isUpper](#isupper)
+     - [isLower](#islower)
+   - [Example Component](#example-component)
+4. [staticTranslate](#statictranslate)
+
+</details>
 
 ## LocalizeProvider
 
@@ -114,15 +111,16 @@ interface ILocalizeProviderProps {
 #### loadingComponent
 
 - Provide a component to be rendered while a language object is loading. This
-  will be rendered when the initial language object is loading, as well as any
-  time the language is switched. If you are switching to a cached language, or
-  when provided a language object, this will not be rendered as the switch will
-  be immediate.
+  will be rendered any time phrases have to be fetched. If the phrases are
+  cached, or when provided a phrases object, this will not be rendered as the
+  switch will be immediate.
 
-#### cachePhrases
+#### noCache
 
-- By default, this is false. If set to true, any given or fetched phrases will
-  be cached within the provider.
+- By default, this is false. If set to true, none of the given or fetched
+  phrases will be cached within the provider. Any subsequent attempts to switch
+  to these languages will require a new phrases object be provided, or will make
+  a call to [getPhrases](#getphrases).
 
 ### Example Initialization
 
