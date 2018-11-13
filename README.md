@@ -277,7 +277,7 @@ interface ILocalizeProps {
 
 #### `t`
 
-- The language phrase you wish to translate.
+- The phrase string you wish to translate.
 
 #### `options`
 
