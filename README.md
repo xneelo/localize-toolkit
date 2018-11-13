@@ -7,8 +7,6 @@ It exposes 4 items: [LocalizeProvider](#localizeprovider),
 [staticTranslate](#statictranslate). Expand the table of contents to jump to a
 specific item within these.
 
----
-
 <details><summary>Table of Contents</summary>
 
 1. [LocalizeProvider](#localizeprovider)
@@ -41,8 +39,7 @@ specific item within these.
 4. [staticTranslate](#statictranslate)
 
 </details>
-
----
+<br />
 
 **Features**:
 
