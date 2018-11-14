@@ -13,8 +13,8 @@ export interface ILocalizeProps {
  * React component for mapping keys to localized sentences.
  */
 export const Localize: React.SFC<ILocalizeProps> = ({ t, options, isUpper = false, isLower = false }) => {
-  const consumerFunc = value => {
-    let localeString = value.t(t, options);
+  const consumerFunc = localize => {
+    let localeString = localize.t(t, options);
     if (isUpper) localeString = localeString.toUpperCase();
     if (isLower) localeString = localeString.toLowerCase();
     return localeString;
