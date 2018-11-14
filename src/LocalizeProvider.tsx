@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { localizePolyglot, LocalizeContext } from './Globals';
+import { localizePolyglot, LocalizeContext, ILocalizeContextValue } from './Globals';
 
 enum ProviderStatus {
   Loading = 'loading',
@@ -118,13 +118,13 @@ export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
   };
 
   // Provider value
-  const value = {
-    t: (phrase, options?) => localizePolyglot.t(phrase, options),
+  const value: ILocalizeContextValue = {
+    currentLanguage,
+    isLoaded: status === ProviderStatus.Loaded,
     setLanguage,
     isLanguageCached,
     clearCache,
-    currentLanguage,
-    isLoaded: status === ProviderStatus.Loaded,
+    t: (phrase, options?) => localizePolyglot.t(phrase, options),
   };
 
   return (

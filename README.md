@@ -46,12 +46,12 @@ specific item within these.
    - [Example Initialization](#example-initialization)
 2. [LocalizeContext](#localizecontext)
    - [LocalizeContext API](#localizecontext-api)
-     - [t](#t)
+     - [currentLanguage](#currentlanguage)
+     - [isLoaded](#isloaded)
      - [setLanguage](#setlanguage)
      - [isLanguageCached](#islanguagecached)
      - [clearCache](#clearcache)
-     - [currentLanguage](#currentlanguage)
-     - [isLoaded](#isloaded)
+     - [t](#t)
    - [Example Use](#example-use)
      - [Functional Component](#functional-component)
      - [Class Component](#class-component)
@@ -152,16 +152,25 @@ Context.
 <!-- prettier-ignore -->
 ```ts
 interface ILocalizeContextValue {
-  setLanguage?: (language: string, languageObject?: IPhrases) => Promise<void>;
-  isLanguageCached?: (language: string) => boolean;
-  clearCache?: (language?: string) => void;
-  currentLanguage?: string;
-  isLoaded?: boolean;
-  t?(phrase: string): string;
-  t?(phrase: string, smartCount: number): string;
-  t?(phrase: string, interpolationOptions: Polyglot.InterpolationOptions): string;
+  currentLanguage: string;
+  isLoaded: boolean;
+  setLanguage(language: string, languageObject?: IPhrases, shouldCache?: boolean): Promise<void>;
+  isLanguageCached(language: string): boolean;
+  clearCache(language?: string): void;
+  t(phrase: string): string;
+  t(phrase: string, smartCount: number): string;
+  t(phrase: string, interpolationOptions: Polyglot.InterpolationOptions): string;
 }
 ```
+
+#### `currentLanguage`
+
+- Returns the current language string.
+
+#### `isLoaded`
+
+- Returns true if language is loaded, false if it is currently fetching a
+  phrases object from the [getPhrases](#getphrases) API method.
 
 #### `setLanguage`
 
@@ -182,15 +191,6 @@ interface ILocalizeContextValue {
 
 - Clears a phrases object for the provided language from the cache if it exists.
   If no language is provided, this method clears all phrases from the cache.
-
-#### `currentLanguage`
-
-- Returns the current language string.
-
-#### `isLoaded`
-
-- Returns true if language is loaded, false if it is currently fetching a
-  phrases object from the [getPhrases](#getphrases) API method.
 
 #### `t`
 
