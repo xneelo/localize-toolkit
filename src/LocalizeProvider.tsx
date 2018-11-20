@@ -54,6 +54,7 @@ export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
       } else if (!isLanguageCached(language) && getPhrases) {
         setStatus(ProviderStatus.Loading);
         newLanguageObject = await getPhrases(language);
+        setStatus(ProviderStatus.Loaded);
       } else if (!isLanguageCached(language)) {
         throw new Error(
           `No language object provided, language ${language} is not cached, and no getPhrases function is provided.`,
@@ -81,8 +82,6 @@ export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
     } catch (error) {
       if (onFailed) onFailed(error);
     }
-
-    if (status === ProviderStatus.Loading) setStatus(ProviderStatus.Loaded);
   };
 
   const isLanguageCached = (language: string) => language in phrases;
