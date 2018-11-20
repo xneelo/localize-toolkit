@@ -5,10 +5,15 @@ import { IPhrases } from './LocalizeProvider';
 // Types
 
 export interface ITranslate {
-  t: (phrase: string, options?: number | Polyglot.InterpolationOptions) => string;
+  /**
+   * Translate a phrase and provide any options for the localization.
+   * @param phrase The phrase to translate.
+   * @param options Optional. Polyglot options. Can be smartcount or interpolation.
+   */
+  t(phrase: string, options?: number | Polyglot.InterpolationOptions): string;
 }
 
-export interface ILocalizeContextValue {
+export interface ILocalizeContextValue extends ITranslate {
   /**
    * The current language string. Example: "en".
    */
@@ -35,12 +40,6 @@ export interface ILocalizeContextValue {
    * entire cache of language objects.
    */
   clearCache(language?: string): void;
-  /**
-   * Translate a phrase and provide any options for the localization.
-   * @param phrase The phrase to translate.
-   * @param options Optional. Polyglot options. Can be smartcount or interpolation.
-   */
-  t(phrase: string, options?: number | Polyglot.InterpolationOptions): string;
 }
 
 // Values
