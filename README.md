@@ -270,8 +270,7 @@ class MyComponent extends Component {
 interface ILocalizeProps {
   t: string;
   options?: number | Polyglot.InterpolationOptions;
-  isUpper?: boolean;
-  isLower?: boolean;
+  transformString?: (translated: string) => string;
 }
 ```
 
@@ -285,13 +284,14 @@ interface ILocalizeProps {
   given to Polyglot. For information on how to use this, check the
   [documentation](http://airbnb.io/polyglot.js/);
 
-#### `isUpper`
+#### `transformString`
 
-- Transform entire returned phrase to uppercase.
+- A function that takes in the translated string and returns the string that is
+  rendered by the component. For example, you can convert it to uppercase:
 
-#### `isLower`
-
-- Transform entire returned phrase to lowercase.
+  ```ts
+  const transformString = (translated: string) => translated.toUpperCase();
+  ```
 
 ### Example Component
 

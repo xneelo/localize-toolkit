@@ -80,13 +80,10 @@ export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
       // Store new language object in the state if new object exists and
       // no cache is false.
       if (newLanguageObject && !noCache) {
-        setPhrases(
-          previousState =>
-            ({
-              ...previousState,
-              [language]: newLanguageObject,
-            } as { [language: string]: IPhrases }),
-        );
+        setPhrases(previousState => ({
+          ...previousState,
+          [language]: newLanguageObject as IPhrases,
+        }));
       }
     } catch (error) {
       if (onFailed) onFailed(error);
