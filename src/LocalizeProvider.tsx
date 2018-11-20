@@ -42,13 +42,6 @@ export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
     if (!currentLanguage && initialLanguage) setLanguage(initialLanguage, initialPhrases);
   }, []);
 
-  /**
-   * Set the current language, and provide an optional language object. If no
-   * language object is provided, will attempt to fetch language using language
-   * token from provided getPhrases API.
-   * @param language Language token (example: 'en').
-   * @param languageObject Optional. Object of localize token maps for the language.
-   */
   const setLanguage = async (language: string, languageObject?: IPhrases) => {
     // New language object will be either given object, fetched object, or
     // null. If new language object is not defined at this step, and there is
@@ -92,16 +85,8 @@ export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
     if (status === ProviderStatus.Loading) setStatus(ProviderStatus.Loaded);
   };
 
-  /**
-   * Returns true if language is currently cached by the Localize Provider.
-   * @param language Language token (example: 'en').
-   */
   const isLanguageCached = (language: string) => language in phrases;
 
-  /**
-   * Clears a cached language object. If no language is provided, clears the
-   * entire cache of language objects.
-   */
   const clearCache = (language?: string) => {
     if (language) {
       if (language in phrases) {
