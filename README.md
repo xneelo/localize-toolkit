@@ -157,9 +157,7 @@ interface ILocalizeContextValue {
   setLanguage(language: string, languageObject?: IPhrases, shouldCache?: boolean): Promise<void>;
   isLanguageCached(language: string): boolean;
   clearCache(language?: string): void;
-  t(phrase: string): string;
-  t(phrase: string, smartCount: number): string;
-  t(phrase: string, interpolationOptions: Polyglot.InterpolationOptions): string;
+  t: (phrase: string, options?: number | Polyglot.InterpolationOptions) => string;
 }
 ```
 
