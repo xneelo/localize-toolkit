@@ -287,17 +287,18 @@ interface ILocalizeProps {
 #### `transformString`
 
 - A function that takes in the translated string and returns the string that is
-  rendered by the component. For example, you can convert it to uppercase:
-
-  ```ts
-  const transformString = (translated: string) => translated.toUpperCase();
-  ```
+  rendered by the component. For example, you can convert the translated string
+  to uppercase.
 
 ### Example Component
 
 ```ts
-// Returns "Hi John" if language is "en" or "Bonjour John" if language is "fr".
-<Localize t="hi_name" options={{ name: 'John' }} />
+// Returns "HI JOHN" if language is "en" or "BONJOUR JOHN" if language is "fr".
+<Localize
+  t="hi_name"
+  options={{ name: 'John' }}
+  transformString={translated => translated.toUpperCase()}
+/>
 ```
 
 <br />
