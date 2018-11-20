@@ -1,23 +1,23 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "outDir": "lib",
-    "target": "es5",
-    "module": "commonjs",
-    "jsx": "react",
-    "sourceMap": true,
     "declaration": true,
-    "removeComments": true,
-    "noUnusedLocals": false,
-    "strictNullChecks": true,
-    "moduleResolution": "node",
-    "preserveConstEnums": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
+    "jsx": "react",
     "lib": ["es2017", "dom"],
-    "paths": {
-      "./lib/*": ["./src/*"]
-    }
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": false,
+    "outDir": "lib",
+    "paths": { "./lib/*": ["./src/*"] },
+    "preserveConstEnums": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "target": "es5"
   },
   "include": ["src"]
 }

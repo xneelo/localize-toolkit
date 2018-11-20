@@ -22,7 +22,7 @@ export interface ILocalizeContextValue extends ITranslate {
 export const LocalizeContext = React.createContext<ILocalizeContextValue>({
   currentLanguage: '',
   isLoaded: false,
-  setLanguage: async () => {
+  setLanguage: () => {
     throw new Error('No provider');
   },
   isLanguageCached: () => {
