@@ -126,7 +126,7 @@ export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
 
   return (
     <LocalizeContext.Provider value={value}>
-      {status === ProviderStatus.Loaded ? children : loadingComponent || null}
+      {status === ProviderStatus.Loading && loadingComponent ? loadingComponent : children}
     </LocalizeContext.Provider>
   );
 };

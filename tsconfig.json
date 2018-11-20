@@ -19,6 +19,5 @@
       "./lib/*": ["./src/*"]
     }
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "lib"]
+  "include": ["src"]
 }
