@@ -121,7 +121,7 @@ export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
     setLanguage,
     isLanguageCached,
     clearCache,
-    t: (phrase, options?) => localizePolyglot.t(phrase, options),
+    t: (phrase, options?) => localizePolyglot.t(phrase, options as number), // Fixes ts complaining
   };
 
   return (

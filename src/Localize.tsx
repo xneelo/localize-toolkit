@@ -14,7 +14,7 @@ export interface ILocalizeProps {
 export const Localize: React.SFC<ILocalizeProps> = ({ t, options, transformString }) => (
   <LocalizeContext.Consumer>
     {localize => {
-      const localeString = localize.t(t, options as number); // Fixes ts complaining
+      const localeString = localize.t(t, options);
       if (transformString) return transformString(localeString);
       return localeString;
     }}

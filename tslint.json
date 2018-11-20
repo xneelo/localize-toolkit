@@ -7,6 +7,12 @@
     "object-literal-sort-keys": false,
     "ordered-imports": false,
     "unified-signatures": false,
-    "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore", "allow-pascal-case"]
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-leading-underscore",
+      "allow-pascal-case"
+    ]
   }
 }

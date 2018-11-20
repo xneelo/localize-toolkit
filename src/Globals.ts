@@ -5,9 +5,7 @@ import { IPhrases } from './LocalizeProvider';
 // Types
 
 export interface ITranslate {
-  t(phrase: string): string;
-  t(phrase: string, smartCount: number): string;
-  t(phrase: string, interpolationOptions: Polyglot.InterpolationOptions): string;
+  t: (phrase: string, options?: number | Polyglot.InterpolationOptions) => string;
 }
 
 export interface ILocalizeContextValue extends ITranslate {
@@ -49,5 +47,5 @@ export const localizePolyglot = new Polyglot();
  * static translation of the phrase.
  */
 export const staticTranslate: ITranslate = {
-  t: (phrase, options?) => localizePolyglot.t(phrase, options),
+  t: (phrase, options?) => localizePolyglot.t(phrase, options as number), // Fixes ts complaining
 };
