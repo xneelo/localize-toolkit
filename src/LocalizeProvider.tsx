@@ -71,8 +71,8 @@ export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
       localizePolyglot.extend(newLanguageObject || phrases[language]);
       localizePolyglot.locale(language);
 
-      // Store new language object in the state if new object exists and
-      // no cache is false.
+      // Store new language object in the state if new object exists and no
+      // cache is false.
       if (newLanguageObject && !noCache) {
         setPhrases(previousState => ({
           ...previousState,
