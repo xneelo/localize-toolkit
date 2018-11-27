@@ -5,11 +5,11 @@ localization library to provide robust localization tools for React projects.
 
 **Features**:
 
-1. Loading placeholder prop while phrases are being fetched
-1. Reloading of every translated phrase upon language switch without remounting
-   any components
+1. Updates every translated phrase on language switch without remounting any
+   components
 1. Caching phrases to avoid repeat fetching
 1. Static localization method for non-React files
+1. Loading placeholder prop while phrases are being fetched
 
 **Dependencies**:
 
