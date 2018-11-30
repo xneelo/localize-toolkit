@@ -166,7 +166,7 @@ Context.
 
 <!-- prettier-ignore -->
 ```ts
-interface ILocalizeContextValue {
+interface ILocalizeContextValue { 
   currentLanguage: string;
   isLoaded: boolean;
   setLanguage(language: string, languageObject?: IPhrases, shouldCache?: boolean): Promise<void>;
@@ -316,7 +316,7 @@ interface ILocalizeProps {
 />
 ```
 
-----
+---
 
 <br />
 
