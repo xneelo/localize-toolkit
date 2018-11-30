@@ -32,7 +32,7 @@ export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
   const [currentLanguage, setCurrentLanguage] = React.useState<string>('');
 
   // The cache of phrases mapped to their language.
-  const [phrases, setPhrases] = React.useState<{ [language: string]: IPhrases }>({});
+  const [storedPhrases, setStoredPhrases] = React.useState<{ [language: string]: IPhrases }>({});
 
   // The current status of fetching languages from getPhrases.
   const [status, setStatus] = React.useState<ProviderStatus>(ProviderStatus.Loading);
@@ -42,22 +42,24 @@ export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
     if (!currentLanguage && initialLanguage) setLanguage(initialLanguage, initialPhrases);
   }, []);
 
-  const setLanguage = async (language: string, languageObject?: IPhrases) => {
+  const setLanguage = async (language: string, phrases?: IPhrases) => {
     // New language object will be either given object, fetched object, or
     // null. If new language object is not defined at this step, and there is
     // no cache for the language, then this statement will throw and the
     // language will not be set (no language object available).
     try {
-      let newLanguageObject: IPhrases | null = null;
-      if (languageObject) {
-        newLanguageObject = languageObject;
+      let newPhrases: IPhrases | null = null;
+      if (phrases) {
+        newPhrases = phrases;
       } else if (!isLanguageCached(language) && getPhrases) {
         setStatus(ProviderStatus.Loading);
-        newLanguageObject = await getPhrases(language);
+        newPhrases = await getPhrases(language);
       } else if (!isLanguageCached(language)) {
         throw new Error(
           `No language object provided, language ${language} is not cached, and no getPhrases function is provided.`,
         );
+      } else {
+        newPhrases = storedPhrases[language];
       }
 
       // Update the current language.
@@ -67,15 +69,15 @@ export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
       localizePolyglot.clear();
 
       // Extend polyglot to use new language object or cached, and set locale.
-      localizePolyglot.extend(newLanguageObject || phrases[language]);
+      localizePolyglot.extend(newPhrases);
       localizePolyglot.locale(language);
 
       // Store new language object in the state if new object exists and no
       // cache is false.
-      if (newLanguageObject && !noCache) {
-        setPhrases(previousState => ({
+      if (newPhrases && !noCache) {
+        setStoredPhrases(previousState => ({
           ...previousState,
-          [language]: newLanguageObject as IPhrases,
+          [language]: newPhrases as IPhrases,
         }));
       }
     } catch (error) {
@@ -85,17 +87,17 @@ export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
     setStatus(ProviderStatus.Loaded);
   };
 
-  const isLanguageCached = (language: string) => language in phrases;
+  const isLanguageCached = (language: string) => language in storedPhrases;
 
   const clearCache = (language?: string) => {
     if (language) {
-      if (language in phrases) {
-        const newState = { ...phrases };
+      if (language in storedPhrases) {
+        const newState = { ...storedPhrases };
         delete newState[language];
-        setPhrases(newState);
+        setStoredPhrases(newState);
       }
     } else {
-      setPhrases({});
+      setStoredPhrases({});
     }
   };
 

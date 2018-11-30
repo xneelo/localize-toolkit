@@ -23,13 +23,13 @@ export interface ILocalizeContextValue extends ITranslate {
    */
   isLoaded: boolean;
   /**
-   * Set the current language, and provide an optional language object. If no
-   * language object is provided, will attempt to fetch language using language
-   * token from provided getPhrases API.
+   * Set the current language, and provide an optional phrases object. If no
+   * phrases object is provided, will attempt to fetch language using language
+   * token from provided getPhrases API in the Provider.
    * @param language Language token (example: 'en').
-   * @param languageObject Optional. Object of localize token maps for the language.
+   * @param phrases Optional. Object of phrases for the language.
    */
-  setLanguage(language: string, languageObject?: IPhrases, shouldCache?: boolean): Promise<void>;
+  setLanguage(language: string, phrases?: IPhrases): Promise<void>;
   /**
    * Returns true if language is currently cached by the Localize Provider.
    * @param language Language token (example: 'en').

@@ -101,16 +101,15 @@ interface ILocalizeProviderProps {
 
 #### `initialLanguage`
 
-- Provide the initial language string. If used with
-  [initialPhrases](#initialphrases), will set language and use the object
-  provided to map phrases. Otherwise, will call [getPhrases](#getphrases) API
-  endpoint if provided.
+- Provide the initial language string. If used with `initialPhrases`, will set
+  language and use the object provided to map phrases. Otherwise, will call
+  `getPhrases API endpoint if provided.
 
 #### `initialPhrases`
 
-- If [initialLanguage](#initiallanguage) is provided, this prop can be given to
-  provide a phrases object. Otherwise an API call to [getPhrases](#getphrases)
-  will be made with the initial language.
+- If `initialLanguage` is provided, this prop can be given to provide a phrases
+  object. Otherwise an API call to `getPhrases` will be made with the initial
+  language.
 
 #### `getPhrases`
 
@@ -120,8 +119,8 @@ interface ILocalizeProviderProps {
 #### `onFailed`
 
 - Callback for when switching a language fails. This could be caused by
-  [getPhrases](#getphrases) failing, or by attempting to switch when
-  [getPhrases](#getphrases) is not provided and no phrases are cached.
+  `getPhrases` failing, or by attempting to switch when `getPhrases` is not
+  provided and no phrases are cached.
 
 #### `loadingComponent`
 
@@ -135,7 +134,7 @@ interface ILocalizeProviderProps {
 - By default, this is false. If set to true, none of the given or fetched
   phrases will be cached within the provider. Any subsequent attempts to switch
   to these languages will require a new phrases object be provided, or will make
-  a call to [getPhrases](#getphrases).
+  a call to `getPhrases`.
 
 ### Example Initialization
 
@@ -159,8 +158,8 @@ ReactDom.render(
 
 ## LocalizeContext
 
-All methods for localization and updating the Provider are accessed through this
-Context.
+All methods for localization and updating the
+[LocalizeProvider](#localizeprovider) are accessed through this Context.
 
 ### LocalizeContext API
 
@@ -169,7 +168,7 @@ Context.
 interface ILocalizeContextValue { 
   currentLanguage: string;
   isLoaded: boolean;
-  setLanguage(language: string, languageObject?: IPhrases, shouldCache?: boolean): Promise<void>;
+  setLanguage(language: string, phrases?: IPhrases): Promise<void>;
   isLanguageCached(language: string): boolean;
   clearCache(language?: string): void;
   t: (phrase: string, options?: number | Polyglot.InterpolationOptions) => string;
@@ -182,23 +181,32 @@ interface ILocalizeContextValue {
 
 #### `isLoaded`
 
-- Returns true if language is loaded, false if it is currently fetching a
-  phrases object from the [getPhrases](#getphrases) API method.
+- Returns true if language is loaded, false if the
+  [LocalizeProvider](#localizeprovider) is currently fetching a phrases object.
 
 #### `setLanguage`
 
 - Call this method to set the language. You must provide a language string (ex:
-  'en'), and can optionally provide the corresponding language object. If the
-  language is not previously cached and no language object is provided,
-  [getPhrases](#getphrases) will be called to get the language object for the
-  provided language. If [getPhrases](#getphrases) is not provided,
-  [onFailed](#onfailed) will be called as there is no way to set the language.
+  `'en'`), and can optionally provide the corresponding language object. Once
+  this method is called, there is a sequence of checks:
+
+  - If the phrases are provided, they will be used for the given language.
+  - If no phrases are provided:
+
+    - If the phrases aren't cached, fetch them from `getPhrases` prop in
+      [LocalizeProvider](#localizeprovider).
+
+      > Note: If no phrases are cached and no `getPhrases` prop is provided, the
+      > `onFailed` prop will be called as the localize toolkit has no way to set
+      > the phrases for the specified language.
+
+    - If they are cached, use the cached phrases.
 
 #### `isLanguageCached`
 
 - Check if there are cached phrases for a given language string. This can be
-  called before [setLanguage](#setlanguage) in order to check whether you will
-  have to provide a phrases object.
+  called before `setLanguage` in order to check whether you will have to provide
+  a phrases object.
 
 #### `clearCache`
 
@@ -212,7 +220,7 @@ interface ILocalizeContextValue {
 
 ### Example Use
 
-> Note: See the [Localize Component](#localize) documentation for more
+> Note: See the [Localize](#localize) Component documentation for more
 > information on using the JSX component below.
 
 #### Functional Component
