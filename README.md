@@ -77,6 +77,8 @@ specific item within these.
 
 </details>
 
+---
+
 <br />
 
 ## LocalizeProvider
@@ -150,6 +152,8 @@ ReactDom.render(
   document.getElementById('root'),
 );
 ```
+
+---
 
 <br />
 
@@ -269,6 +273,8 @@ class MyComponent extends Component {
 }
 ```
 
+---
+
 <br />
 
 ## Localize
@@ -309,6 +315,8 @@ interface ILocalizeProps {
   transformString={translated => translated.toUpperCase()}
 />
 ```
+
+----
 
 <br />
 
