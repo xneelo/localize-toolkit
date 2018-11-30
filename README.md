@@ -15,8 +15,8 @@ localization library to provide robust localization tools for React projects.
 
 1.  This package requires version `> 16.7.0` of `react` and `react-dom`, as it
     uses the Hooks API.
-1.  This package has a dependency on `node-polyglot`. You may have some issues
-    with typing if you are using TypeScript, since some of the typings are from
+1.  This package has a dependency on `node-polyglot`. You may have some type
+    issues if you are using TypeScript, since some of the types are from
     `node-polyglot`. If this is an issue, you can install the
     `@types/node-polyglot` as a dev-dependency:
 
