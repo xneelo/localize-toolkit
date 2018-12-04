@@ -1,6 +1,6 @@
 {
   "name": "localize-toolkit",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "main": "lib/index.js",
   "typing": "lib/index.d.ts",
   "author": {
@@ -24,6 +24,8 @@
     "babel-jest": "^23.6.0",
     "jest": "^23.6.0",
     "prettier": "^1.14.3",
+    "react": "^16.7.0-alpha.2",
+    "react-dom": "^16.7.0-alpha.2",
     "react-test-renderer": "^16.7.0-alpha.2",
     "ts-jest": "^23.10.5",
     "tslint": "^5.11.0",
@@ -32,7 +34,9 @@
     "typescript": "^3.1.6"
   },
   "dependencies": {
-    "node-polyglot": "^2.3.0",
+    "node-polyglot": "^2.3.0"
+  },
+  "peerDependencies": {
     "react": "^16.7.0-alpha.2",
     "react-dom": "^16.7.0-alpha.2"
   }

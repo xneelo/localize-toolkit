@@ -13,10 +13,18 @@ localization library to provide robust localization tools for React projects.
 
 **Dependencies**:
 
-1.  This package has a dependency on version `> 16.7.0` of `react` and
+1.  This package has a peer dependency on version `> 16.7.0` of `react` and
     `react-dom`, as it uses the
-    [Hooks API](https://reactjs.org/docs/hooks-intro.html). This is a
-    pre-release version and should not be used on production code.
+    [Hooks API](https://reactjs.org/docs/hooks-intro.html). This may require
+    using a pre-release version. These can be installed as follows:
+
+    ```sh
+    # yarn
+    yarn add react@next react-dom@next
+
+    # npm
+    npm i react@next react-dom@next
+    ```
 
 1.  This package has a dependency on `node-polyglot`. You may have some type
     issues if you are using TypeScript, since some of the types are from
