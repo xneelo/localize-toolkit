@@ -8,6 +8,7 @@
     "email": "ux@hetzner.co.za",
     "url": "https://hetzner.co.za/"
   },
+  "repository": "https://github.com/hetznerZA/localize-toolkit",
   "license": "MIT",
   "scripts": {
     "test": "jest ./src --config ./jest.config.js",
