@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "main": "lib/index.js",
   "typing": "lib/index.d.ts",
-  "author": "Liam Ross",
-  "license": "None",
+  "author": {
+    "name": "Hetzner",
+    "email": "ux@hetzner.co.za",
+    "url": "https://hetzner.co.za/"
+  },
+  "license": "MIT",
   "scripts": {
     "build": "tsc"
   },
