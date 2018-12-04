@@ -5,7 +5,7 @@
 /coverage
 
 # builds
-lib
+/lib
 
 # editors
 .idea
