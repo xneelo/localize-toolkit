@@ -20,10 +20,14 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
-# hide configs
+# configs
 tsconfig*
 tslint*
 .prettierrc*
+.travis.yml
 
-# hide yarn.lock
+# tests
+/src/__tests__
+
+# lock files
 yarn.lock

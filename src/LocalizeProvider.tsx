@@ -13,7 +13,7 @@ export interface IPhrases {
 export interface ILocalizeProviderProps {
   initialLanguage?: string;
   initialPhrases?: IPhrases;
-  getPhrases?: ((language: string) => IPhrases);
+  getPhrases?: ((language: string) => Promise<IPhrases>);
   onFailed?: ((error: Error) => any);
   loadingComponent?: React.ReactNode;
   noCache?: boolean;

@@ -93,7 +93,7 @@ component.
 interface ILocalizeProviderProps {
   initialLanguage?: string;
   initialPhrases?: IPhrases;
-  getPhrases?: (language: string) => IPhrases;
+  getPhrases?: (language: string) => Promise<IPhrases>;
   onFailed?: (error: Error) => any;
   loadingComponent?: React.ReactNode;
 }
@@ -114,7 +114,7 @@ interface ILocalizeProviderProps {
 #### `getPhrases`
 
 - Provide this prop to give an API endpoint that can be called with language.
-  This should return a phrases object.
+  This should asynchronously return a phrases object.
 
 #### `onFailed`
 
