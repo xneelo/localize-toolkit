@@ -1,4 +1,4 @@
-# Localize Toolkit
+# Localize Toolkit [![Build Status](https://travis-ci.org/hetznerZA/localize-toolkit.svg?branch=master)](https://travis-ci.org/hetznerZA/localize-toolkit) [![NPM Version](https://badge.fury.io/js/localize-toolkit.svg)](https://www.npmjs.com/package/localize-toolkit)
 
 A localization library that uses React's context API and the Polyglot
 localization library to provide robust localization tools for React projects.
