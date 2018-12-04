@@ -23,6 +23,7 @@ yarn-error.log*
 # configs
 tsconfig*
 tslint*
+jest.config*
 .prettierrc*
 .travis.yml
 
