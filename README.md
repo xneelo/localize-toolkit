@@ -28,7 +28,7 @@ localization library to provide robust localization tools for React projects.
     npm i react@next react-dom@next
     ```
 
-1)  This package has a dependency on `node-polyglot`. You may have some type
+1.  This package has a dependency on `node-polyglot`. You may have some type
     issues if you are using TypeScript, since some of the types are from
     `node-polyglot`. If this is an issue, you can install the
     `@types/node-polyglot` as a dev-dependency:
