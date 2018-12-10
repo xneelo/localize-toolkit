@@ -11,6 +11,15 @@ localization library to provide robust localization tools for React projects.
 1. Static localization method for non-React files
 1. Loading placeholder prop while phrases are being fetched
 
+**Examples**:
+
+1. [Minimal Example](https://codesandbox.io/s/z2mvvz864)
+   - The absolute bare-bones example of using Localize Toolkit
+1. ["Kitchen Sink" Full Example](https://codesandbox.io/s/1yo2ny9lw7)
+   - A full example with faked API calls to fetch new languages
+1. [Overlay Pattern Example](https://codesandbox.io/s/0m12l6k0xn)
+   - A pattern to avoid remounting entirely, with an overlay for loading
+
 **Dependencies**:
 
 1.  This package has a peer dependency on version `^16.7.0-alpha.2` of `react`
