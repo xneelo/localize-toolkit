@@ -12,7 +12,8 @@
   "license": "MIT",
   "scripts": {
     "test": "jest ./src --config ./jest.config.js",
-    "build": "tsc"
+    "build": "tsc",
+    "deploy": "rm -rf lib && tsc && yarn publish"
   },
   "devDependencies": {
     "@types/jest": "^23.3.10",
