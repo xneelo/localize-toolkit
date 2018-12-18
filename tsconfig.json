@@ -13,7 +13,7 @@
     "paths": { "./lib/*": ["./src/*"] },
     "preserveConstEnums": true,
     "removeComments": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "strict": true,
     "target": "es5"
   },

@@ -8,16 +8,20 @@
     "email": "ux@hetzner.co.za",
     "url": "https://hetzner.co.za/"
   },
+  "files": [
+    "README.md",
+    "LICENSE",
+    "lib/"
+  ],
   "repository": "https://github.com/hetznerZA/localize-toolkit",
   "license": "MIT",
   "scripts": {
     "test": "jest ./src --config ./jest.config.js",
-    "build": "tsc",
+    "build": "rm -rf lib && tsc",
     "deploy": "rm -rf lib && tsc && yarn publish"
   },
   "devDependencies": {
     "@types/jest": "^23.3.10",
-    "@types/node-polyglot": "^0.4.31",
     "@types/react": "^16.7.0",
     "@types/react-dom": "^16.0.9",
     "@types/react-test-renderer": "^16.0.3",

@@ -73,5 +73,5 @@ export const localizePolyglot = new Polyglot();
  * static translation of the phrase.
  */
 export const staticTranslate: ITranslate = {
-  t: (phrase, options?) => localizePolyglot.t(phrase, options as number), // Fixes ts complaining
+  t: (phrase, options?) => localizePolyglot.t(phrase, options),
 };
