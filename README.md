@@ -154,7 +154,7 @@ ReactDom.render(
     loadingComponent={<div>{'Loading...'}</div>}
     getPhrases={getLanguageAPI}
     initialLanguage="en"
-    cachePhrases
+    noCache
   >
     <App />
   </LocalizeProvider>,
