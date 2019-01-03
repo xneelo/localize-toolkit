@@ -88,8 +88,7 @@ specific item within these.
 
 </details>
 
----
-
+<br />
 <br />
 
 ## LocalizeProvider
@@ -163,8 +162,7 @@ ReactDom.render(
 );
 ```
 
----
-
+<br />
 <br />
 
 ## LocalizeContext
@@ -292,8 +290,7 @@ class MyComponent extends Component {
 }
 ```
 
----
-
+<br />
 <br />
 
 ## Localize
@@ -335,8 +332,7 @@ interface ILocalizeProps {
 />
 ```
 
----
-
+<br />
 <br />
 
 ## staticTranslate
