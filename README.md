@@ -13,11 +13,11 @@ localization library to provide robust localization tools for React projects.
 
 **Examples**:
 
-1. [Minimal Example](https://codesandbox.io/s/z2mvvz864)
+1. [Minimal Example](https://codesandbox.io/s/m4y5oxr828)
    - The absolute bare-bones example of using Localize Toolkit
-1. ["Kitchen Sink" Full Example](https://codesandbox.io/s/1yo2ny9lw7)
+1. ["Kitchen Sink" Full Example](https://codesandbox.io/s/4zlqv2y2zw)
    - A full example with faked API calls to fetch new languages
-1. [Overlay Pattern Example](https://codesandbox.io/s/0m12l6k0xn)
+1. [Overlay Pattern Example](https://codesandbox.io/s/62nzxlpjr3)
    - A pattern to avoid remounting entirely, with an overlay for loading
 
 **Dependencies**:
