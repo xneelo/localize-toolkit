@@ -1,6 +1,6 @@
 {
   "name": "localize-toolkit",
-  "version": "0.3.1",
+  "version": "1.0.0-alpha.1",
   "main": "lib/index.js",
   "typing": "lib/index.d.ts",
   "author": {
@@ -18,7 +18,7 @@
   "scripts": {
     "test": "jest ./src --config ./jest.config.js",
     "build": "rm -rf lib && tsc",
-    "deploy": "rm -rf lib && tsc && yarn publish"
+    "deploy": "rm -rf lib && tsc && yarn publish --tag next"
   },
   "devDependencies": {
     "@types/jest": "^23.3.10",
@@ -41,5 +41,9 @@
   },
   "dependencies": {
     "node-polyglot": "^2.3.0"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0-alpha.1",
+    "react-dom": "^16.8.0-alpha.1"
   }
 }
