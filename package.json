@@ -41,9 +41,5 @@
   },
   "dependencies": {
     "node-polyglot": "^2.3.0"
-  },
-  "peerDependencies": {
-    "react": "16.7.0-alpha.0 - 16.7.0-alpha.999",
-    "react-dom": "16.7.0-alpha.0 - 16.7.0-alpha.999"
   }
 }

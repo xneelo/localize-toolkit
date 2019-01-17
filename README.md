@@ -22,7 +22,7 @@ localization library to provide robust localization tools for React projects.
 
 **Dependencies**:
 
-1.  This package has a peer dependency on version `^16.7.0-alpha.2` of `react`
+1.  This package has a peer dependency on version `^16.8.0-alpha.1` of `react`
     and `react-dom`, as it uses the
     [Hooks API](https://reactjs.org/docs/hooks-intro.html). **This is currently
     in pre-release, so localize-toolkit should _not_ be used in production

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { localizePolyglot, LocalizeContext, ILocalizeContextValue } from './Globals';
 
 enum ProviderStatus {
@@ -29,16 +29,16 @@ export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
   noCache,
 }) => {
   // The current localization language.
-  const [currentLanguage, setCurrentLanguage] = React.useState<string>('');
+  const [currentLanguage, setCurrentLanguage] = useState<string>('');
 
   // The cache of phrases mapped to their language.
-  const [cachedPhrases, setCachedPhrases] = React.useState<{ [language: string]: IPhrases }>({});
+  const [cachedPhrases, setCachedPhrases] = useState<{ [language: string]: IPhrases }>({});
 
   // The current status of fetching languages from getPhrases.
-  const [status, setStatus] = React.useState<ProviderStatus>(ProviderStatus.Loading);
+  const [status, setStatus] = useState<ProviderStatus>(ProviderStatus.Loading);
 
   // Call setLanguage on component mount if initial language provided.
-  React.useEffect(() => {
+  useEffect(() => {
     if (!currentLanguage && initialLanguage) setLanguage(initialLanguage, initialPhrases);
   }, []);
 
