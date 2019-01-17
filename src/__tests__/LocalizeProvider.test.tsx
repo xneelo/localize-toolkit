@@ -44,11 +44,14 @@ describe('LocalizeProvider', () => {
    */
   describe('getPhrases', () => {
     it('is called if setLanguage is called without providing phrases', done => {
-      const LocalizeMock: React.SFC<{}> = () => {
-        const localize = React.useContext(LocalizeContext);
-        if (!localize.isLoaded) localize.setLanguage('en');
-        return null;
-      };
+      const LocalizeMock: React.SFC<{}> = () => (
+        <LocalizeContext.Consumer>
+          {localize => {
+            if (!localize.isLoaded) localize.setLanguage('en');
+            return null;
+          }}
+        </LocalizeContext.Consumer>
+      );
       const getPhrasesMock = () => done();
       Renderer.create(
         <LocalizeProvider getPhrases={getPhrasesMock}>
