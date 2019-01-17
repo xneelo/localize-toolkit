@@ -22,19 +22,18 @@ localization library to provide robust localization tools for React projects.
 
 **Dependencies**:
 
-1.  This package has a peer dependency on version `^16.8.0-alpha.1` of `react`
-    and `react-dom`, as it uses the
-    [Hooks API](https://reactjs.org/docs/hooks-intro.html). **This is currently
-    in pre-release, so localize-toolkit should _not_ be used in production
-    code.** If your code is not using the pre-release `v16.7` of `react` and
-    `react-dom`, you can install it using the following commands:
+1.  This package has a peer dependency on version `^16.6.0` of `react` and
+    `react-dom`, as it uses the
+    [Context API](https://reactjs.org/blog/2018/10/23/react-v-16-6.html). If
+    your code is not using the latest version of `react` and `react-dom`, you
+    can install it using the following commands:
 
     ```sh
     # yarn
-    yarn add react@next react-dom@next
+    yarn add react react-dom
 
     # npm
-    npm i react@next react-dom@next
+    npm i react react-dom
     ```
 
 1.  This package has a dependency on `node-polyglot`. You may have some type
@@ -75,7 +74,6 @@ specific item within these.
      - [clearCache](#clearcache)
      - [t](#t)
    - [Example Use](#example-use)
-     - [Functional Component](#functional-component)
      - [Class Component](#class-component)
 3. [Localize](#localize)
    - [Localize Props](#localize-props)
@@ -231,32 +229,6 @@ interface ILocalizeContextValue {
 
 > Note: See the [Localize](#localize) Component documentation for more
 > information on using the JSX component below.
-
-#### Functional Component
-
-```ts
-import React, { useContext, useEffect } from 'react';
-import { LocalizeContext, Localize } from 'react-localize';
-
-function MyComponent({}) {
-  const localize = useContext(LocalizeContext);
-
-  useEffect(() => {
-    localize.setLanguage('en');
-  }, []);
-
-  const translateOutsideOfJSX = () => {
-    return localize.t('translate_token');
-  };
-
-  return (
-    <>
-      {/* See Localize Component for information on this component. */}
-      <Localize t={'translate_token'} />
-    </>
-  );
-}
-```
 
 #### Class Component
 
