@@ -22,20 +22,22 @@ localization library to provide robust localization tools for React projects.
 
 **Dependencies**:
 
-1.  This package has a peer dependency on version `^16.8.0-alpha.1` of `react`
-    and `react-dom`, as it uses the
-    [Hooks API](https://reactjs.org/docs/hooks-intro.html). **This is currently
-    in pre-release, so localize-toolkit should _not_ be used in production
-    code.** If your code is not using the pre-release `v16.7` of `react` and
-    `react-dom`, you can install it using the following commands:
+1.  This package has a peer dependency on version `^16.8.0` of `react` and
+    `react-dom`, as it uses the
+    [Hooks API](https://reactjs.org/docs/hooks-intro.html).
 
-    ```sh
-    # yarn
-    yarn add react@next react-dom@next
-
-    # npm
-    npm i react@next react-dom@next
-    ```
+    > If you are not using Hooks, you can instead
+    > [install `v0.4.2` of localize toolkit](https://www.npmjs.com/package/localize-toolkit/v/0.4.2)
+    > which supports `^16.6.0` of `react` and `react-dom`. `v0.4.2` contains the
+    > exact same functionality as this version. This can be done as follows:
+    >
+    > ```sh
+    > # yarn
+    > yarn add localize-toolkit@0.4.2
+    >
+    > # npm
+    > npm i localize-toolkit@0.4.2
+    > ```
 
 1.  This package has a dependency on `node-polyglot`. You may have some type
     issues if you are using TypeScript, since some of the types are from
