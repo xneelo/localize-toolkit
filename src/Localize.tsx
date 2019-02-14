@@ -1,6 +1,6 @@
-import * as React from 'react';
-import * as Polyglot from 'node-polyglot';
-import { LocalizeContext } from './Globals';
+import React from 'react';
+import Polyglot from 'node-polyglot';
+import {LocalizeContext} from './Globals';
 
 export interface ILocalizeProps {
   t: string;
@@ -11,7 +11,7 @@ export interface ILocalizeProps {
 /**
  * React component for mapping keys to localized sentences.
  */
-export const Localize: React.SFC<ILocalizeProps> = ({ t, options, transformString }) => (
+export const Localize: React.SFC<ILocalizeProps> = ({t, options, transformString}) => (
   <LocalizeContext.Consumer>
     {localize => {
       const localeString = localize.t(t, options);

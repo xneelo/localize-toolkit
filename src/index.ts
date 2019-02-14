@@ -1,6 +1,6 @@
-import { LocalizeProvider, IPhrases, ILocalizeProviderProps } from './LocalizeProvider';
-import { LocalizeContext, staticTranslate, ITranslate } from './Globals';
-import { Localize, ILocalizeProps } from './Localize';
+import {LocalizeProvider, IPhrases, ILocalizeProviderProps} from './LocalizeProvider';
+import {LocalizeContext, staticTranslate, ITranslate} from './Globals';
+import {Localize, ILocalizeProps} from './Localize';
 
 export {
   // Localize

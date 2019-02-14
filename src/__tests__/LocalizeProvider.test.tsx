@@ -1,16 +1,16 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as Renderer from 'react-test-renderer';
-import { LocalizeContext, LocalizeProvider } from '..';
+import {LocalizeContext, LocalizeProvider} from '..';
 
-let mockSuccessGetPhrases = jest.fn(() => Promise.resolve({ hi: 'Hi' }));
-let mockFailedGetPhrases = jest.fn(() => Promise.reject('Failed'));
+let mockSuccessGetPhrases: jest.Mock<Promise<any>, []>;
+let mockFailedGetPhrases: jest.Mock<Promise<never>, []>;
 
 let container: HTMLDivElement;
 
 describe('LocalizeProvider', () => {
   beforeEach(() => {
-    mockSuccessGetPhrases = jest.fn(() => Promise.resolve({ hi: 'Hi' }));
+    mockSuccessGetPhrases = jest.fn(() => Promise.resolve({hi: 'Hi'}));
     mockFailedGetPhrases = jest.fn(() => Promise.reject('Failed'));
 
     container = document.createElement('div');
@@ -36,7 +36,7 @@ describe('LocalizeProvider', () => {
     it('initialPhrases used if provided with initialLanguage', done => {
       Renderer.act(() => {
         ReactDOM.render(
-          <LocalizeProvider initialLanguage="en" initialPhrases={{ hi: 'Hello' }}>
+          <LocalizeProvider initialLanguage="en" initialPhrases={{hi: 'Hello'}}>
             <LocalizeContext.Consumer>
               {l => {
                 const localeString = l.t('hi');

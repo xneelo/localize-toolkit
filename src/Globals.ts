@@ -1,6 +1,6 @@
-import * as React from 'react';
-import * as Polyglot from 'node-polyglot';
-import { IPhrases } from './LocalizeProvider';
+import React from 'react';
+import Polyglot from 'node-polyglot';
+import {IPhrases} from './LocalizeProvider';
 
 // Types
 

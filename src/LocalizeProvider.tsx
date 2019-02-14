@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { localizePolyglot, LocalizeContext, ILocalizeContextValue } from './Globals';
+import React, {useState, useEffect} from 'react';
+import {localizePolyglot, LocalizeContext, ILocalizeContextValue} from './Globals';
 
 enum ProviderStatus {
   Loading = 'loading',
@@ -13,8 +13,8 @@ export interface IPhrases {
 export interface ILocalizeProviderProps {
   initialLanguage?: string;
   initialPhrases?: IPhrases;
-  getPhrases?: ((language: string) => Promise<IPhrases>);
-  onFailed?: ((error: Error) => any);
+  getPhrases?: (language: string) => Promise<IPhrases>;
+  onFailed?: (error: Error) => any;
   loadingComponent?: React.ReactNode;
   noCache?: boolean;
 }
@@ -29,18 +29,19 @@ export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
   noCache,
 }) => {
   // The current localization language.
-  const [currentLanguage, setCurrentLanguage] = React.useState<string>('');
+  const [currentLanguage, setCurrentLanguage] = useState<string>('');
 
   // The cache of phrases mapped to their language.
-  const [cachedPhrases, setCachedPhrases] = React.useState<{ [language: string]: IPhrases }>({});
+  const [cachedPhrases, setCachedPhrases] = useState<{[language: string]: IPhrases}>({});
 
   // The current status of fetching languages from getPhrases.
-  const [status, setStatus] = React.useState<ProviderStatus>(ProviderStatus.Loading);
+  const [status, setStatus] = useState<ProviderStatus>(ProviderStatus.Loading);
 
   // Call setLanguage on component mount if initial language provided.
-  React.useEffect(() => {
+  // Will also set language if either initialLanguage or initialPhrases changes.
+  useEffect(() => {
     if (!currentLanguage && initialLanguage) setLanguage(initialLanguage, initialPhrases);
-  }, []);
+  }, [initialLanguage, initialPhrases]);
 
   const setLanguage = async (language: string, phrases?: IPhrases) => {
     // New language object will be either given object, fetched object, or
@@ -93,7 +94,7 @@ export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
   const clearCache = (language?: string) => {
     if (language) {
       if (language in cachedPhrases) {
-        const newState = { ...cachedPhrases };
+        const newState = {...cachedPhrases};
         delete newState[language];
         setCachedPhrases(newState);
       }
