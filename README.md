@@ -102,10 +102,10 @@ component.
 ### LocalizeProvider Props
 
 ```ts
-interface ILocalizeProviderProps {
+interface LocalizeProviderProps {
   initialLanguage?: string;
-  initialPhrases?: IPhrases;
-  getPhrases?: (language: string) => Promise<IPhrases>;
+  initialPhrases?: Phrases;
+  getPhrases?: (language: string) => Promise<Phrases>;
   onFailed?: (error: Error) => any;
   loadingComponent?: React.ReactNode;
 }
@@ -176,10 +176,10 @@ All methods for localization and updating the
 
 <!-- prettier-ignore -->
 ```ts
-interface ILocalizeContextValue { 
+interface LocalizeContextValue { 
   currentLanguage: string;
   isLoaded: boolean;
-  setLanguage(language: string, phrases?: IPhrases): Promise<void>;
+  setLanguage(language: string, phrases?: Phrases): Promise<void>;
   isLanguageCached(language: string): boolean;
   clearCache(language?: string): void;
   t: (phrase: string, options?: number | Polyglot.InterpolationOptions) => string;
@@ -237,8 +237,8 @@ interface ILocalizeContextValue {
 #### Functional Component
 
 ```ts
-import React, { useContext, useEffect } from 'react';
-import { LocalizeContext, Localize } from 'react-localize';
+import React, {useContext, useEffect} from 'react';
+import {LocalizeContext, Localize} from 'react-localize';
 
 function MyComponent({}) {
   const localize = useContext(LocalizeContext);
@@ -263,8 +263,8 @@ function MyComponent({}) {
 #### Class Component
 
 ```ts
-import React, { Component } from 'react';
-import { LocalizeContext, Localize } from 'react-localize';
+import React, {Component} from 'react';
+import {LocalizeContext, Localize} from 'react-localize';
 
 class MyComponent extends Component {
   static contextType = LocalizeContext;
@@ -300,7 +300,7 @@ class MyComponent extends Component {
 ### Localize Props
 
 ```ts
-interface ILocalizeProps {
+interface LocalizeProps {
   t: string;
   options?: number | Polyglot.InterpolationOptions;
   transformString?: (translated: string) => string;
@@ -329,7 +329,7 @@ interface ILocalizeProps {
 // Returns "HI JOHN" if language is "en" or "BONJOUR JOHN" if language is "fr".
 <Localize
   t="hi_name"
-  options={{ name: 'John' }}
+  options={{name: 'John'}}
   transformString={translated => translated.toUpperCase()}
 />
 ```
@@ -358,5 +358,5 @@ follows:
 
 ```ts
 // Returns "Hi John" if language is "en" or "Bonjour John" if language is "fr".
-const translatedPhrase = staticTranslate.t('hi_name', { name: 'John' });
+const translatedPhrase = staticTranslate.t('hi_name', {name: 'John'});
 ```

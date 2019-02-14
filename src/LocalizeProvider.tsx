@@ -1,25 +1,25 @@
 import React, {useState, useEffect} from 'react';
-import {localizePolyglot, LocalizeContext, ILocalizeContextValue} from './Globals';
+import {localizePolyglot, LocalizeContext, LocalizeContextValue} from './Globals';
 
 enum ProviderStatus {
   Loading = 'loading',
   Loaded = 'loaded',
 }
 
-export interface IPhrases {
-  [phrase: string]: string | IPhrases;
+export interface Phrases {
+  [phrase: string]: string | Phrases;
 }
 
-export interface ILocalizeProviderProps {
+export interface LocalizeProviderProps {
   initialLanguage?: string;
-  initialPhrases?: IPhrases;
-  getPhrases?: (language: string) => Promise<IPhrases>;
-  onFailed?: (error: Error) => any;
+  initialPhrases?: Phrases;
+  getPhrases?: (language: string) => Promise<Phrases>;
+  onFailed?: (error: Error) => void;
   loadingComponent?: React.ReactNode;
   noCache?: boolean;
 }
 
-export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
+export const LocalizeProvider: React.SFC<LocalizeProviderProps> = ({
   children,
   initialLanguage,
   initialPhrases,
@@ -32,24 +32,20 @@ export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
   const [currentLanguage, setCurrentLanguage] = useState<string>('');
 
   // The cache of phrases mapped to their language.
-  const [cachedPhrases, setCachedPhrases] = useState<{[language: string]: IPhrases}>({});
+  const [cachedPhrases, setCachedPhrases] = useState<{[language: string]: Phrases}>({});
 
   // The current status of fetching languages from getPhrases.
   const [status, setStatus] = useState<ProviderStatus>(ProviderStatus.Loading);
 
-  // Call setLanguage on component mount if initial language provided.
-  // Will also set language if either initialLanguage or initialPhrases changes.
-  useEffect(() => {
-    if (!currentLanguage && initialLanguage) setLanguage(initialLanguage, initialPhrases);
-  }, [initialLanguage, initialPhrases]);
+  const isLanguageCached = (language: string) => language in cachedPhrases;
 
-  const setLanguage = async (language: string, phrases?: IPhrases) => {
+  const setLanguage = async (language: string, phrases?: Phrases) => {
     // New language object will be either given object, fetched object, or
     // null. If new language object is not defined at this step, and there is
     // no cache for the language, then this statement will throw and the
     // language will not be set (no language object available).
     try {
-      let newPhrases: IPhrases | null = null;
+      let newPhrases: Phrases | null = null;
       if (phrases) {
         newPhrases = phrases;
       } else if (!isLanguageCached(language) && getPhrases) {
@@ -79,7 +75,7 @@ export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
       if (newPhrases && !noCache) {
         setCachedPhrases(previousState => ({
           ...previousState,
-          [language]: newPhrases as IPhrases,
+          [language]: newPhrases as Phrases,
         }));
       }
     } catch (error) {
@@ -89,7 +85,11 @@ export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
     setStatus(ProviderStatus.Loaded);
   };
 
-  const isLanguageCached = (language: string) => language in cachedPhrases;
+  // Call setLanguage on component mount if initial language provided.
+  // Will also set language if either initialLanguage or initialPhrases changes.
+  useEffect(() => {
+    if (!currentLanguage && initialLanguage) setLanguage(initialLanguage, initialPhrases);
+  }, [initialLanguage, initialPhrases]);
 
   const clearCache = (language?: string) => {
     if (language) {
@@ -104,7 +104,7 @@ export const LocalizeProvider: React.SFC<ILocalizeProviderProps> = ({
   };
 
   // Provider value
-  const value: ILocalizeContextValue = {
+  const value: LocalizeContextValue = {
     currentLanguage,
     isLoaded: status === ProviderStatus.Loaded,
     setLanguage,

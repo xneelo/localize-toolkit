@@ -1,10 +1,10 @@
 import React from 'react';
 import Polyglot from 'node-polyglot';
-import {IPhrases} from './LocalizeProvider';
+import {Phrases} from './LocalizeProvider';
 
 // Types
 
-export interface ITranslate {
+export interface Translate {
   /**
    * Translate a phrase and provide any options for the localization.
    * @param phrase The phrase to translate.
@@ -13,7 +13,7 @@ export interface ITranslate {
   t(phrase: string, options?: number | Polyglot.InterpolationOptions): string;
 }
 
-export interface ILocalizeContextValue extends ITranslate {
+export interface LocalizeContextValue extends Translate {
   /**
    * The current language string. Example: "en".
    */
@@ -29,7 +29,7 @@ export interface ILocalizeContextValue extends ITranslate {
    * @param language Language token (example: 'en').
    * @param phrases Optional. Object of phrases for the language.
    */
-  setLanguage(language: string, phrases?: IPhrases): Promise<void>;
+  setLanguage(language: string, phrases?: Phrases): Promise<void>;
   /**
    * Returns true if language is currently cached by the Localize Provider.
    * @param language Language token (example: 'en').
@@ -45,7 +45,7 @@ export interface ILocalizeContextValue extends ITranslate {
 // Values
 
 /** Localize context instance. */
-export const LocalizeContext = React.createContext<ILocalizeContextValue>({
+export const LocalizeContext = React.createContext<LocalizeContextValue>({
   currentLanguage: '',
   isLoaded: false,
   setLanguage: () => {
@@ -72,6 +72,6 @@ export const localizePolyglot = new Polyglot();
  * Static translate object. Call `staticTranslate.t("phrase")` to receive a
  * static translation of the phrase.
  */
-export const staticTranslate: ITranslate = {
+export const staticTranslate: Translate = {
   t: (phrase, options?) => localizePolyglot.t(phrase, options),
 };

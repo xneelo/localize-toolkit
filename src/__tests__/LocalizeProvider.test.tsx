@@ -3,14 +3,12 @@ import * as ReactDOM from 'react-dom';
 import * as Renderer from 'react-test-renderer';
 import {LocalizeContext, LocalizeProvider} from '..';
 
-let mockSuccessGetPhrases: jest.Mock<Promise<any>, []>;
 let mockFailedGetPhrases: jest.Mock<Promise<never>, []>;
 
 let container: HTMLDivElement;
 
 describe('LocalizeProvider', () => {
   beforeEach(() => {
-    mockSuccessGetPhrases = jest.fn(() => Promise.resolve({hi: 'Hi'}));
     mockFailedGetPhrases = jest.fn(() => Promise.reject('Failed'));
 
     container = document.createElement('div');

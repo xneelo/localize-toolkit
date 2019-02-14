@@ -2,7 +2,7 @@ import React from 'react';
 import Polyglot from 'node-polyglot';
 import {LocalizeContext} from './Globals';
 
-export interface ILocalizeProps {
+export interface LocalizeProps {
   t: string;
   options?: number | Polyglot.InterpolationOptions;
   transformString?: (translated: string) => string;
@@ -11,7 +11,7 @@ export interface ILocalizeProps {
 /**
  * React component for mapping keys to localized sentences.
  */
-export const Localize: React.SFC<ILocalizeProps> = ({t, options, transformString}) => (
+export const Localize: React.SFC<LocalizeProps> = ({t, options, transformString}) => (
   <LocalizeContext.Consumer>
     {localize => {
       const localeString = localize.t(t, options);
