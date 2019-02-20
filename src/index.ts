@@ -1,9 +1,8 @@
-import {LocalizeProvider, Phrases, LocalizeProviderProps} from './LocalizeProvider';
-import {LocalizeContext, staticTranslate, Translate} from './Globals';
+import {LocalizeContext, staticTranslate} from './Globals';
 import {Localize, LocalizeProps} from './Localize';
+import {LocalizeProvider, LocalizeProviderProps, Phrases} from './LocalizeProvider';
 
 export {
-  // Localize
   LocalizeProvider,
   LocalizeContext,
   Localize,
@@ -12,5 +11,4 @@ export {
   LocalizeProviderProps,
   Phrases,
   LocalizeProps,
-  Translate,
 };

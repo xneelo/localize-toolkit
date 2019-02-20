@@ -1,10 +1,10 @@
-import React from 'react';
 import Polyglot from 'node-polyglot';
+import React from 'react';
 import {Phrases} from './LocalizeProvider';
 
 // Types
 
-export interface Translate {
+interface Translate {
   /**
    * Translate a phrase and provide any options for the localization.
    * @param phrase The phrase to translate.
@@ -15,13 +15,22 @@ export interface Translate {
 
 export interface LocalizeContextValue extends Translate {
   /**
+   * True if phrases are being fetched.
+   */
+  loading: boolean;
+  /**
+   * Contains any errors from fetching or setting a language.
+   */
+  error: Error | null;
+  /**
    * The current language string. Example: "en".
    */
   currentLanguage: string;
   /**
-   * True if phrases are loaded, false if they are being fetched.
+   * Returns true if language is currently cached by the Localize Provider.
+   * @param language Language token (example: 'en').
    */
-  isLoaded: boolean;
+  isLanguageCached(language: string): boolean;
   /**
    * Set the current language, and provide an optional phrases object. If no
    * phrases object is provided, will attempt to fetch language using language
@@ -30,11 +39,6 @@ export interface LocalizeContextValue extends Translate {
    * @param phrases Optional. Object of phrases for the language.
    */
   setLanguage(language: string, phrases?: Phrases): Promise<void>;
-  /**
-   * Returns true if language is currently cached by the Localize Provider.
-   * @param language Language token (example: 'en').
-   */
-  isLanguageCached(language: string): boolean;
   /**
    * Clears a cached language object. If no language is provided, clears the
    * entire cache of language objects.
@@ -47,7 +51,8 @@ export interface LocalizeContextValue extends Translate {
 /** Localize context instance. */
 export const LocalizeContext = React.createContext<LocalizeContextValue>({
   currentLanguage: '',
-  isLoaded: false,
+  loading: false,
+  error: new Error('No provider'),
   setLanguage: () => {
     throw new Error('No provider');
   },
@@ -66,7 +71,7 @@ export const LocalizeContext = React.createContext<LocalizeContextValue>({
 export const localizePolyglot = new Polyglot();
 
 /**
- * **NOTE**: Only use this in non-React files. This will create a static
+ * **WARNING**: Only use this in non-React files. This will create a static
  * translation and will not update when the language changes.
  *
  * Static translate object. Call `staticTranslate.t("phrase")` to receive a
