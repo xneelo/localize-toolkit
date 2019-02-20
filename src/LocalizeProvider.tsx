@@ -61,11 +61,8 @@ export const LocalizeProvider: React.FC<LocalizeProviderProps> = ({children, get
       // Update the current language.
       setCurrentLanguage(language);
 
-      // Clear current mapped language in polyglot.
-      localizePolyglot.clear();
-
       // Extend polyglot to use new language object or cached, and set locale.
-      localizePolyglot.extend(newPhrases);
+      localizePolyglot.replace(newPhrases);
       localizePolyglot.locale(language);
 
       // Store new language object in the state if new object exists and no
