@@ -13,11 +13,11 @@ localization library to provide robust localization tools for React projects.
 
 **Examples**:
 
-1. [Minimal Example](https://codesandbox.io/s/z2mvvz864)
+1. [Minimal Example](https://codesandbox.io/s/yprnw94rwj)
    - The absolute bare-bones example of using Localize Toolkit
-1. ["Kitchen Sink" Full Example](https://codesandbox.io/s/1yo2ny9lw7)
+1. ["Kitchen Sink" Full Example](https://codesandbox.io/s/v63mqkm95y)
    - A full example with faked API calls to fetch new languages
-1. [Overlay Pattern Example](https://codesandbox.io/s/0m12l6k0xn)
+1. [Overlay Pattern Example](https://codesandbox.io/s/0n6xy6800)
    - A pattern to avoid remounting entirely, with an overlay for loading
 
 **Dependencies**:
@@ -80,8 +80,7 @@ specific item within these.
    - [Localize Props](#localize-props)
      - [t](#t-1)
      - [options](#options)
-     - [isUpper](#isupper)
-     - [isLower](#islower)
+     - [transformString](#transformString)
    - [Example Component](#example-component)
 4. [staticTranslate](#statictranslate)
 
@@ -288,9 +287,9 @@ interface LocalizeProps {
 
 #### `transformString`
 
-- A function that takes in the translated string and returns the string that is
-  rendered by the component. For example, you can convert the translated string
-  to uppercase.
+- A function that takes in the translated string and returns the string that
+  will be rendered by the component. For example, you can convert the translated
+  string to uppercase.
 
 ### Example Component
 
