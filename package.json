@@ -18,7 +18,7 @@
   "scripts": {
     "test": "jest ./src --config ./jest.config.js",
     "build": "rm -rf lib && tsc",
-    "deploy": "rm -rf lib && tsc && yarn publish"
+    "deploy": "rm -rf lib && tsc && yarn publish --tag unstable"
   },
   "devDependencies": {
     "@types/jest": "^24.0.6",
@@ -40,6 +40,7 @@
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
     "react-test-renderer": "^16.8.2",
+    "react-testing-library": "^5.9.0",
     "ts-jest": "^24.0.0",
     "typescript": "^3.3.3"
   },

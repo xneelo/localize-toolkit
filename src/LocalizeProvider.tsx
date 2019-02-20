@@ -1,12 +1,23 @@
 import React, {useState} from 'react';
-import {LocalizeContext, LocalizeContextValue, localizePolyglot} from './Globals';
+import {LocalizeContext, LocalizeContextValue, localizePolyglot} from './Instances';
 
+/**
+ * The `Phrases` object is either given to `setLanguage`, or returned from
+ * `getPhrases`.
+ */
 export interface Phrases {
   [phrase: string]: string | Phrases;
 }
 
 export interface LocalizeProviderProps {
+  /**
+   * A function to fetch the `Phrases` object for a given language.
+   */
   getPhrases?: (language: string) => Promise<Phrases>;
+  /**
+   * If true, will prevent the `LocalizeProvider` from caching `Phrases`
+   * objects. Default: false.
+   */
   noCache?: boolean;
 }
 

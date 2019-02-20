@@ -1,8 +1,11 @@
 import Polyglot from 'node-polyglot';
 import React from 'react';
-import {LocalizeContext} from './Globals';
+import {LocalizeContext} from './Instances';
 
 export interface LocalizeProps {
+  /**
+   *
+   */
   t: string;
   options?: number | Polyglot.InterpolationOptions;
   transformString?: (translated: string) => string;

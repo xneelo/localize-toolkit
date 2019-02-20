@@ -1,4 +1,4 @@
-import {LocalizeContext, staticTranslate} from './Globals';
+import {LocalizeContext, staticTranslate} from './Instances';
 import {Localize, LocalizeProps} from './Localize';
 import {LocalizeProvider, LocalizeProviderProps, Phrases} from './LocalizeProvider';
 
