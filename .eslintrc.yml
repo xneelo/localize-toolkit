@@ -2,13 +2,6 @@ env:
   browser: true
   es6: true
   jest: true
-extends:
-  - 'eslint:recommended'
-  - 'plugin:react/recommended'
-  - 'plugin:@typescript-eslint/recommended'
-  - 'prettier'
-  - 'prettier/react'
-  - 'prettier/@typescript-eslint'
 parser: '@typescript-eslint/parser'
 parserOptions:
   ecmaFeatures:
@@ -16,9 +9,19 @@ parserOptions:
   ecmaVersion: 2018
   sourceType: 'module'
 plugins:
-  - 'react'
-  - 'jest'
+  - react-hooks
+  - react
+  - jest
   - '@typescript-eslint'
+extends:
+  - 'eslint:recommended'
+  - 'plugin:react/recommended'
+  - 'plugin:@typescript-eslint/recommended'
+  - 'prettier'
+  - 'prettier/react'
+  - 'prettier/@typescript-eslint'
 rules:
+  react-hooks/rules-of-hooks: error
+  react-hooks/reactive-deps: error
   react/prop-types: off
   '@typescript-eslint/explicit-function-return-type': off

@@ -13,11 +13,11 @@ localization library to provide robust localization tools for React projects.
 
 **Examples**:
 
-1. [Minimal Example](https://codesandbox.io/s/z2mvvz864)
+1. [Minimal Example](https://codesandbox.io/s/yprnw94rwj)
    - The absolute bare-bones example of using Localize Toolkit
-1. ["Kitchen Sink" Full Example](https://codesandbox.io/s/1yo2ny9lw7)
+1. ["Kitchen Sink" Full Example](https://codesandbox.io/s/v63mqkm95y)
    - A full example with faked API calls to fetch new languages
-1. [Overlay Pattern Example](https://codesandbox.io/s/0m12l6k0xn)
+1. [Overlay Pattern Example](https://codesandbox.io/s/0n6xy6800)
    - A pattern to avoid remounting entirely, with an overlay for loading
 
 **Dependencies**:
@@ -61,19 +61,16 @@ specific item within these.
 
 1. [LocalizeProvider](#localizeprovider)
    - [LocalizeProvider Props](#localizeprovider-props)
-     - [initialLanguage](#initiallanguage)
-     - [initialPhrases](#initialphrases)
      - [getPhrases](#getphrases)
-     - [onFailed](#onfailed)
-     - [loadingComponent](#loadingcomponent)
      - [noCache](#nocache)
    - [Example Initialization](#example-initialization)
 2. [LocalizeContext](#localizecontext)
    - [LocalizeContext API](#localizecontext-api)
+     - [loading](#loading)
+     - [error](#error)
      - [currentLanguage](#currentlanguage)
-     - [isLoaded](#isloaded)
-     - [setLanguage](#setlanguage)
      - [isLanguageCached](#islanguagecached)
+     - [setLanguage](#setlanguage)
      - [clearCache](#clearcache)
      - [t](#t)
    - [Example Use](#example-use)
@@ -83,8 +80,7 @@ specific item within these.
    - [Localize Props](#localize-props)
      - [t](#t-1)
      - [options](#options)
-     - [isUpper](#isupper)
-     - [isLower](#islower)
+     - [transformString](#transformString)
    - [Example Component](#example-component)
 4. [staticTranslate](#statictranslate)
 
@@ -101,45 +97,17 @@ component.
 
 ### LocalizeProvider Props
 
-```ts
+```tsx
 interface LocalizeProviderProps {
-  initialLanguage?: string;
-  initialPhrases?: Phrases;
   getPhrases?: (language: string) => Promise<Phrases>;
-  onFailed?: (error: Error) => any;
-  loadingComponent?: React.ReactNode;
+  noCache?: boolean;
 }
 ```
-
-#### `initialLanguage`
-
-- Provide the initial language string. If used with `initialPhrases`, will set
-  language and use the object provided to map phrases. Otherwise, will call
-  `getPhrases API endpoint if provided.
-
-#### `initialPhrases`
-
-- If `initialLanguage` is provided, this prop can be given to provide a phrases
-  object. Otherwise an API call to `getPhrases` will be made with the initial
-  language.
 
 #### `getPhrases`
 
 - Provide this prop to give an API endpoint that can be called with language.
-  This should asynchronously return a phrases object.
-
-#### `onFailed`
-
-- Callback for when switching a language fails. This could be caused by
-  `getPhrases` failing, or by attempting to switch when `getPhrases` is not
-  provided and no phrases are cached.
-
-#### `loadingComponent`
-
-- Provide a component to be rendered while a language object is loading. This
-  will be rendered any time phrases have to be fetched. If the phrases are
-  cached, or when provided a phrases object, this will not be rendered as the
-  switch will be immediate.
+  This should asynchronously return a `Phrases` object.
 
 #### `noCache`
 
@@ -150,14 +118,9 @@ interface LocalizeProviderProps {
 
 ### Example Initialization
 
-```ts
+```tsx
 ReactDom.render(
-  <LocalizeProvider
-    loadingComponent={<div>{'Loading...'}</div>}
-    getPhrases={getLanguageAPI}
-    initialLanguage="en"
-    noCache
-  >
+  <LocalizeProvider getPhrases={getLanguageAPI} noCache>
     <App />
   </LocalizeProvider>,
   document.getElementById('root'),
@@ -175,25 +138,35 @@ All methods for localization and updating the
 ### LocalizeContext API
 
 <!-- prettier-ignore -->
-```ts
-interface LocalizeContextValue { 
+```tsx
+interface LocalizeContextValue {
+  loading: boolean;
+  error: Error | null;
   currentLanguage: string;
-  isLoaded: boolean;
-  setLanguage(language: string, phrases?: Phrases): Promise<void>;
   isLanguageCached(language: string): boolean;
+  setLanguage(language: string, phrases?: Phrases): Promise<void>;
   clearCache(language?: string): void;
   t: (phrase: string, options?: number | Polyglot.InterpolationOptions) => string;
 }
 ```
 
+#### `loading`
+
+- Returns true if language is being fetched.
+
+#### `error`
+
+- Returns any errors encountered in setting the language.
+
 #### `currentLanguage`
 
 - Returns the current language string.
 
-#### `isLoaded`
+#### `isLanguageCached`
 
-- Returns true if language is loaded, false if the
-  [LocalizeProvider](#localizeprovider) is currently fetching a phrases object.
+- Check if there are cached phrases for a given language string. This can be
+  called before `setLanguage` in order to check whether you will have to provide
+  a phrases object.
 
 #### `setLanguage`
 
@@ -202,22 +175,17 @@ interface LocalizeContextValue {
   this method is called, there is a sequence of checks:
 
   - If the phrases are provided, they will be used for the given language.
+
   - If no phrases are provided:
 
     - If the phrases aren't cached, fetch them from `getPhrases` prop in
       [LocalizeProvider](#localizeprovider).
 
-      > Note: If no phrases are cached and no `getPhrases` prop is provided, the
-      > `onFailed` prop will be called as the localize toolkit has no way to set
-      > the phrases for the specified language.
+      > Note: If no phrases are cached and no `getPhrases` prop is provided, an
+      > error will occur as the localize toolkit has no way to set the phrases
+      > for the specified language.
 
     - If they are cached, use the cached phrases.
-
-#### `isLanguageCached`
-
-- Check if there are cached phrases for a given language string. This can be
-  called before `setLanguage` in order to check whether you will have to provide
-  a phrases object.
 
 #### `clearCache`
 
@@ -236,7 +204,7 @@ interface LocalizeContextValue {
 
 #### Functional Component
 
-```ts
+```tsx
 import React, {useContext, useEffect} from 'react';
 import {LocalizeContext, Localize} from 'react-localize';
 
@@ -253,7 +221,7 @@ function MyComponent({}) {
 
   return (
     <>
-      {/* See Localize Component for information on this component. */}
+      {translateOutsideOfJSX()}
       <Localize t={'translate_token'} />
     </>
   );
@@ -262,7 +230,7 @@ function MyComponent({}) {
 
 #### Class Component
 
-```ts
+```tsx
 import React, {Component} from 'react';
 import {LocalizeContext, Localize} from 'react-localize';
 
@@ -284,7 +252,7 @@ class MyComponent extends Component {
 
     return (
       <>
-        {/* See Localize Component for information on below. */}
+        {this.translateOutsideOfJSX()}
         <Localize t={'translate_token'} />
       </>
     );
@@ -299,7 +267,7 @@ class MyComponent extends Component {
 
 ### Localize Props
 
-```ts
+```tsx
 interface LocalizeProps {
   t: string;
   options?: number | Polyglot.InterpolationOptions;
@@ -319,13 +287,13 @@ interface LocalizeProps {
 
 #### `transformString`
 
-- A function that takes in the translated string and returns the string that is
-  rendered by the component. For example, you can convert the translated string
-  to uppercase.
+- A function that takes in the translated string and returns the string that
+  will be rendered by the component. For example, you can convert the translated
+  string to uppercase.
 
 ### Example Component
 
-```ts
+```tsx
 // Returns "HI JOHN" if language is "en" or "BONJOUR JOHN" if language is "fr".
 <Localize
   t="hi_name"
@@ -356,7 +324,7 @@ method within Polyglot. For information on how to use this, check the
 [documentation](http://airbnb.io/polyglot.js/). This method can be used as
 follows:
 
-```ts
+```tsx
 // Returns "Hi John" if language is "en" or "Bonjour John" if language is "fr".
 const translatedPhrase = staticTranslate.t('hi_name', {name: 'John'});
 ```
