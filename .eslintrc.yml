@@ -12,6 +12,7 @@ plugins:
   - 'jest'
   - 'react'
   - '@typescript-eslint'
+  - 'react-hooks'
 extends:
   - 'eslint:recommended'
   - 'plugin:react/recommended'
@@ -22,6 +23,8 @@ extends:
 rules:
   no-var: error
   prefer-const: error
+  react-hooks/rules-of-hooks: error
+  react-hooks/exhaustive-deps: warn
 overrides:
   - files:
       - '*.ts'
