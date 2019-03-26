@@ -1,6 +1,6 @@
 {
   "name": "localize-toolkit",
-  "version": "2.1.0",
+  "version": "2.1.0-unstable.0",
   "main": "lib/index.js",
   "typing": "lib/index.d.ts",
   "author": {
