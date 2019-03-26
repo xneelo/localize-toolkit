@@ -52,7 +52,7 @@ export const LocalizeProvider: React.FC<LocalizeProviderProps> = ({children, get
           newPhrases = await getPhrases(language);
         } else if (!isLanguageCached(language)) {
           throw new TypeError(
-            `No language object provided, language ${language} is not cached,` +
+            `No phrases object provided, language ${language} is not cached,` +
               ` and the getPhrases prop is not provided.`,
           );
         } else {

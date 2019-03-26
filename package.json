@@ -31,7 +31,7 @@
     "@types/react-test-renderer": "^16.8.1",
     "@typescript-eslint/eslint-plugin": "^1.4.0",
     "@typescript-eslint/parser": "^1.4.0",
-    "babel-core": "^7.0.0-bridge.0",
+    "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^24.1.0",
     "eslint": "^5.14.1",
     "eslint-config-prettier": "^4.0.0",
@@ -43,7 +43,7 @@
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
     "react-test-renderer": "^16.8.2",
-    "react-testing-library": "^5.9.0",
+    "react-testing-library": "^6.0.2",
     "ts-jest": "^24.0.0",
     "typescript": "^3.3.3"
   },
