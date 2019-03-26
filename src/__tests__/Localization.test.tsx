@@ -17,7 +17,7 @@ const MockChild: React.FC<{shouldFail?: boolean; stayLoading?: boolean}> = ({sho
   useEffect(() => {
     const phrases = shouldFail ? undefined : {by_name: 'By %{name}'};
     if (!stayLoading) localize.setLanguage('en', phrases);
-  }, []);
+  }, [localize, shouldFail, stayLoading]);
   if (localize.loading) return <p data-testid="loading">loading</p>;
   if (localize.error) return <p data-testid="error">error</p>;
   return <p data-testid="success">{localize.t('by_name', {name: 'John Doe'})}</p>;
