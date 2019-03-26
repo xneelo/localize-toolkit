@@ -22,14 +22,14 @@ localization library to provide robust localization tools for React projects.
 
 **Dependencies**:
 
-1.  This package has a peer dependency on version `^16.8.0` of `react` and
+1.  This package has a peer dependency on version `>16.8.0` of `react` and
     `react-dom`, as it uses the
     [Hooks API](https://reactjs.org/docs/hooks-intro.html).
 
     > If you are not using Hooks, you can instead
     > [install `v0.4.2` of localize toolkit](https://www.npmjs.com/package/localize-toolkit/v/0.4.2)
-    > which supports `^16.6.0` of `react` and `react-dom`. `v0.4.2` contains the
-    > exact same functionality as this version. This can be done as follows:
+    > which supports `^16.6.0` of `react` and `react-dom`. `v0.4.2`. This can be
+    > done as follows:
     >
     > ```sh
     > # yarn
