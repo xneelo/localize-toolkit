@@ -1,14 +1,15 @@
 import {LocalizeContext, staticTranslate} from './Instances';
-import {Localize, LocalizeProps} from './Localize';
-import {LocalizeProvider, LocalizeProviderProps, Phrases} from './LocalizeProvider';
+import {Localize} from './Localize';
+import {LocalizeProvider} from './LocalizeProvider';
+import {LocalizeProps, LocalizeProviderProps, Phrases} from './types';
 
 export {
-  LocalizeProvider,
   LocalizeContext,
-  Localize,
   staticTranslate,
+  Localize,
+  LocalizeProvider,
   // Types
+  LocalizeProps,
   LocalizeProviderProps,
   Phrases,
-  LocalizeProps,
 };

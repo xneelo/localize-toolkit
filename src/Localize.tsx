@@ -1,15 +1,6 @@
-import Polyglot from 'node-polyglot';
 import React from 'react';
 import {LocalizeContext} from './Instances';
-
-export interface LocalizeProps {
-  /**
-   *
-   */
-  t: string;
-  options?: number | Polyglot.InterpolationOptions;
-  transformString?: (translated: string) => string;
-}
+import {LocalizeProps} from './types';
 
 /**
  * React component for mapping keys to localized sentences.

@@ -17,10 +17,10 @@
   "license": "MIT",
   "scripts": {
     "test": "jest ./src --config ./jest.config.js",
-    "build": "rm -rf lib && tsc",
-    "deploy": "rm -rf lib && tsc && yarn publish",
-    "deploy:next": "rm -rf lib && tsc && yarn publish --tag next",
-    "deploy:unstable": "rm -rf lib && tsc && yarn publish --tag unstable",
+    "build": "rm -rf lib && tsc -p tsbuild.json",
+    "deploy": "yarn build && yarn publish",
+    "deploy:next": "yarn build && yarn publish --tag next",
+    "deploy:unstable": "yarn build && yarn publish --tag unstable",
     "lint": "eslint './src' --ext .js,.jsx,.ts,.tsx --cache"
   },
   "devDependencies": {

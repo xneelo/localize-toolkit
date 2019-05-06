@@ -2,8 +2,6 @@ import React, {useContext, useEffect} from 'react';
 import {cleanup, render, waitForElement} from 'react-testing-library';
 import {LocalizeContext, LocalizeProvider} from '../index';
 
-/* eslint-disable @typescript-eslint/camelcase, react-hooks/reactive-deps */
-
 const Mock: React.FC<{shouldFail?: boolean; stayLoading?: boolean}> = ({shouldFail, stayLoading}) => {
   return (
     <LocalizeProvider>
