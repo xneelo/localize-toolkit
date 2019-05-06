@@ -27,8 +27,8 @@ localization library to provide robust localization tools for React projects.
 
     > If you are not using Hooks, you can instead
     > [install `v0.4.2` of localize toolkit](https://www.npmjs.com/package/localize-toolkit/v/0.4.2)
-    > which supports `^16.6.0` of `react` and `react-dom`. `v0.4.2`. This can be
-    > done as follows:
+    > which supports `^16.6.0` of `react` and `react-dom`. This can be done as
+    > follows:
     >
     > ```sh
     > # yarn
@@ -205,7 +205,7 @@ interface LocalizeContextValue {
 
 ```tsx
 import React, {useContext, useEffect} from 'react';
-import {LocalizeContext, Localize} from 'react-localize';
+import {LocalizeContext, Localize} from 'localize-toolkit';
 
 function MyComponent({}) {
   const localize = useContext(LocalizeContext);
@@ -231,7 +231,7 @@ function MyComponent({}) {
 
 ```tsx
 import React, {Component} from 'react';
-import {LocalizeContext, Localize} from 'react-localize';
+import {LocalizeContext, Localize} from 'localize-toolkit';
 
 class MyComponent extends Component {
   static contextType = LocalizeContext;
