@@ -212,7 +212,7 @@ function MyComponent({}) {
 
   useEffect(() => {
     localize.setLanguage('en');
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const translateOutsideOfJSX = () => {
     return localize.t('translate_token');
