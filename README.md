@@ -24,12 +24,12 @@ The toolkit exposes 5 items: [LocalizeProvider](#localizeprovider),
 [useLocalize](#uselocalize) and [staticTranslate](#statictranslate). Expand the
 table of contents to jump to a specific item within these.
 
-<!-- <details><summary><b>Table of Contents</b></summary> -->
+<details><summary><b>Table of Contents</b></summary>
 
 1. [LocalizeProvider](#localizeprovider)
    - [LocalizeProvider Props](#localizeprovider-props)
-     - [getPhrases](#getphrases)
-     - [noCache](#nocache)
+     - [getPhrases](#getphrases-language-string--promisephrases)
+     - [noCache](#nocache-boolean)
    - [Example Initialization](#example-initialization)
 2. [LocalizeContext](#localizecontext)
    - [LocalizeContext API](#localizecontext-api)
@@ -39,7 +39,7 @@ table of contents to jump to a specific item within these.
      - [isLanguageCached](#islanguagecached-language-string--boolean)
      - [setLanguage](#setlanguage-language-string-phrases-phrases--promisevoid)
      - [clearCache](#clearcache-language-string--void)
-     - [t](#t)
+     - [t](#t-phrase-string-options-number--polyglotinterpolationoptions--string)
    - [Example Use](#example-use)
      - [Example in Functional Component](#functional-component)
      - [Example in Class Component](#class-component)
@@ -52,7 +52,7 @@ table of contents to jump to a specific item within these.
 4. [useLocalize](#uselocalize)
 5. [staticTranslate](#statictranslate)
 
-<!-- </details> -->
+</details>
 
 <details><summary><b>Expand for dependency details</b></summary>
 
