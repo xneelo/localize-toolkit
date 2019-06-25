@@ -1,13 +1,17 @@
-import React, {useCallback, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {LocalizeContext, localizePolyglot} from './Instances';
 import {LocalizeContextValue, LocalizeProviderProps, Phrases} from './types';
 
 export const LocalizeProvider: React.FC<LocalizeProviderProps> = ({children, getPhrases, noCache}) => {
+  // Ref for function to prevent reloading if arrow.
+  const getPhrasesRef = useRef(getPhrases);
+
   // The current localization language.
   const [currentLanguage, setCurrentLanguage] = useState<string>('');
 
   // The cache of phrases mapped to their language.
   const [cachedPhrases, setCachedPhrases] = useState<{[language: string]: Phrases}>({});
+  const cachedPhrasesRef = useRef(cachedPhrases);
 
   // The current status of fetching languages.
   const [loading, setLoading] = useState<boolean>(true);
@@ -15,7 +19,13 @@ export const LocalizeProvider: React.FC<LocalizeProviderProps> = ({children, get
   // The current error status of fetching languages.
   const [error, setError] = useState<Error | null>(null);
 
-  const isLanguageCached = useCallback((language: string) => language in cachedPhrases, [cachedPhrases]);
+  // Keep refs up to date.
+  useEffect(() => {
+    getPhrasesRef.current = getPhrases;
+    cachedPhrasesRef.current = cachedPhrases;
+  });
+
+  const isLanguageCached = useCallback((language: string) => language in cachedPhrasesRef.current, []);
 
   const setLanguage = useCallback(
     async (language: string, phrases?: Phrases) => {
@@ -28,16 +38,16 @@ export const LocalizeProvider: React.FC<LocalizeProviderProps> = ({children, get
 
         if (phrases) {
           newPhrases = phrases;
-        } else if (!isLanguageCached(language) && getPhrases) {
+        } else if (!isLanguageCached(language) && getPhrasesRef.current) {
           setLoading(true);
-          newPhrases = await getPhrases(language);
+          newPhrases = await getPhrasesRef.current(language);
         } else if (!isLanguageCached(language)) {
           throw new TypeError(
             `No phrases object provided, language ${language} is not cached,` +
               ` and the getPhrases prop is not provided.`,
           );
         } else {
-          newPhrases = cachedPhrases[language];
+          newPhrases = cachedPhrasesRef.current[language];
         }
 
         // Update the current language.
@@ -61,7 +71,7 @@ export const LocalizeProvider: React.FC<LocalizeProviderProps> = ({children, get
 
       setLoading(false);
     },
-    [cachedPhrases, getPhrases, isLanguageCached, noCache],
+    [isLanguageCached, noCache],
   );
 
   const clearCache = useCallback(
