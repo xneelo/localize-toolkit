@@ -19,24 +19,46 @@ localization library to provide robust localization tools for React projects.
 1. [Overlay Pattern Example](https://codesandbox.io/s/0n6xy6800)
    - A pattern to avoid remounting entirely, with an overlay for loading
 
-**Dependencies**:
+The toolkit exposes 5 items: [LocalizeProvider](#localizeprovider),
+[LocalizeContext](#localizecontext), [Localize](#localize),
+[useLocalize](#uselocalize) and [staticTranslate](#statictranslate). Expand the
+table of contents to jump to a specific item within these.
+
+<!-- <details><summary><b>Table of Contents</b></summary> -->
+
+1. [LocalizeProvider](#localizeprovider)
+   - [LocalizeProvider Props](#localizeprovider-props)
+     - [getPhrases](#getphrases)
+     - [noCache](#nocache)
+   - [Example Initialization](#example-initialization)
+2. [LocalizeContext](#localizecontext)
+   - [LocalizeContext API](#localizecontext-api)
+     - [loading](#loading-boolean)
+     - [error](#error-error--null)
+     - [currentLanguage](#currentlanguage-string)
+     - [isLanguageCached](#islanguagecached-language-string--boolean)
+     - [setLanguage](#setlanguage-language-string-phrases-phrases--promisevoid)
+     - [clearCache](#clearcache-language-string--void)
+     - [t](#t)
+   - [Example Use](#example-use)
+     - [Example in Functional Component](#functional-component)
+     - [Example in Class Component](#class-component)
+3. [Localize](#localize)
+   - [Localize Props](#localize-props)
+     - [t](#t-1)
+     - [options](#options)
+     - [transformString](#transformString)
+   - [Example Component](#example-component)
+4. [useLocalize](#uselocalize)
+5. [staticTranslate](#statictranslate)
+
+<!-- </details> -->
+
+<details><summary><b>Expand for dependency details</b></summary>
 
 1.  This package has a peer dependency on version `>16.8.0` of `react` and
     `react-dom`, as it uses the
     [Hooks API](https://reactjs.org/docs/hooks-intro.html).
-
-    > If you are not using Hooks, you can instead
-    > [install `v0.4.2` of localize toolkit](https://www.npmjs.com/package/localize-toolkit/v/0.4.2)
-    > which supports `^16.6.0` of `react` and `react-dom`. This can be done as
-    > follows:
-    >
-    > ```sh
-    > # yarn
-    > yarn add localize-toolkit@0.4.2
-    >
-    > # npm
-    > npm i localize-toolkit@0.4.2
-    > ```
 
 1.  This package has a dependency on `node-polyglot`. You may have some type
     issues if you are using TypeScript, since some of the types are from
@@ -50,39 +72,6 @@ localization library to provide robust localization tools for React projects.
     # npm
     npm i @types/node-polyglot -D
     ```
-
-The toolkit exposes 4 items: [LocalizeProvider](#localizeprovider),
-[LocalizeContext](#localizecontext), [Localize](#localize) and
-[staticTranslate](#statictranslate). Expand the table of contents to jump to a
-specific item within these.
-
-<details><summary><b>Table of Contents</b></summary>
-
-1. [LocalizeProvider](#localizeprovider)
-   - [LocalizeProvider Props](#localizeprovider-props)
-     - [getPhrases](#getphrases)
-     - [noCache](#nocache)
-   - [Example Initialization](#example-initialization)
-2. [LocalizeContext](#localizecontext)
-   - [LocalizeContext API](#localizecontext-api)
-     - [loading](#loading)
-     - [error](#error)
-     - [currentLanguage](#currentlanguage)
-     - [isLanguageCached](#islanguagecached)
-     - [setLanguage](#setlanguage)
-     - [clearCache](#clearcache)
-     - [t](#t)
-   - [Example Use](#example-use)
-     - [Example in Functional Component](#functional-component)
-     - [Example in Class Component](#class-component)
-3. [Localize](#localize)
-   - [Localize Props](#localize-props)
-     - [t](#t-1)
-     - [options](#options)
-     - [transformString](#transformString)
-   - [Example Component](#example-component)
-4. [useLocalize](#uselocalize)
-5. [staticTranslate](#statictranslate)
 
 </details>
 
@@ -264,25 +253,17 @@ class MyComponent extends Component {
 
 ### Localize Props
 
-```tsx
-interface LocalizeProps {
-  t: string;
-  options?: number | Polyglot.InterpolationOptions;
-  transformString?: (translated: string) => string;
-}
-```
-
-#### `t`
+#### `t`: _`string`_
 
 - The phrase string you wish to translate.
 
-#### `options`
+#### `options`: _`number | Polyglot.InterpolationOptions`_
 
 - Any options for the translated phrase. This acts the same as a second argument
   given to Polyglot. For information on how to use this, check the
   [documentation](http://airbnb.io/polyglot.js/);
 
-#### `transformString`
+#### `transformString`: _`(translated: string) => string`_
 
 - A function that takes in the translated string and returns the string that
   will be rendered by the component. For example, you can convert the translated
