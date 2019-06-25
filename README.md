@@ -41,13 +41,14 @@ table of contents to jump to a specific item within these.
      - [clearCache](#clearcache-language-string--void)
      - [t](#t-phrase-string-options-number--polyglotinterpolationoptions--string)
    - [Example Use](#example-use)
-     - [Example in Functional Component](#functional-component)
-     - [Example in Class Component](#class-component)
+     - [How to consume context](#how-to-consume-context)
+     - [Example in Functional Component](#example-in-functional-component)
+     - [Example in Class Component](#example-in-class-component)
 3. [Localize](#localize)
    - [Localize Props](#localize-props)
-     - [t](#t-1)
-     - [options](#options)
-     - [transformString](#transformString)
+     - [t](#t-string)
+     - [options](#options-number--polyglotinterpolationoptions)
+     - [transformString](#transformstring-translated-string--string)
    - [Example Component](#example-component)
 4. [useLocalize](#uselocalize)
 5. [staticTranslate](#statictranslate)
@@ -167,6 +168,10 @@ All methods for localization and updating the
   [documentation](http://airbnb.io/polyglot.js/);
 
 ### Example Use
+
+Here are some examples for using the localize context within your components.
+
+#### How to consume context
 
 There are three ways to use the localize context:
 
