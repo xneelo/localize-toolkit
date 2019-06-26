@@ -202,9 +202,10 @@ import {Localize, useLocalize} from 'localize-toolkit';
 function MyComponent({}) {
   const localize = useLocalize();
 
+  const setLanguage = localize.setLanguage;
   useEffect(() => {
-    localize.setLanguage('en');
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    setLanguage('en');
+  }, [setLanguage]);
 
   const translateOutsideOfJSX = () => {
     return localize.t('translate_token');
