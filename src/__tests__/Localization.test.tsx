@@ -1,5 +1,5 @@
+import {cleanup, render, waitForElement} from '@testing-library/react';
 import React, {useContext, useEffect} from 'react';
-import {cleanup, render, waitForElement} from 'react-testing-library';
 import {LocalizeContext, LocalizeProvider} from '../index';
 
 const Mock: React.FC<{shouldFail?: boolean; stayLoading?: boolean}> = ({shouldFail, stayLoading}) => {
@@ -12,10 +12,11 @@ const Mock: React.FC<{shouldFail?: boolean; stayLoading?: boolean}> = ({shouldFa
 
 const MockChild: React.FC<{shouldFail?: boolean; stayLoading?: boolean}> = ({shouldFail, stayLoading}) => {
   const localize = useContext(LocalizeContext);
+  const setLanguage = localize.setLanguage;
   useEffect(() => {
     const phrases = shouldFail ? undefined : {by_name: 'By %{name}'};
-    if (!stayLoading) localize.setLanguage('en', phrases);
-  }, [localize, shouldFail, stayLoading]);
+    if (!stayLoading) setLanguage('en', phrases);
+  }, [setLanguage, shouldFail, stayLoading]);
   if (localize.loading) return <p data-testid="loading">loading</p>;
   if (localize.error) return <p data-testid="error">error</p>;
   return <p data-testid="success">{localize.t('by_name', {name: 'John Doe'})}</p>;
