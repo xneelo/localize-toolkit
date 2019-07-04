@@ -24,8 +24,9 @@ export interface LocalizeProps {
 export interface LocalizeProviderProps {
   /**
    * A function to fetch the `Phrases` object for a given language.
+   * @param language The language token to fetch.
    */
-  getPhrases?: (language: string) => Promise<Phrases>;
+  getPhrases?(language: string): Promise<Phrases>;
   /**
    * If true, will prevent the `LocalizeProvider` from caching `Phrases`
    * objects. Default: false.
@@ -47,7 +48,7 @@ export interface Translate {
   /**
    * Translate a phrase and provide any options for the localization.
    * @param phrase The phrase to translate.
-   * @param options Optional. Polyglot options. Can be smartcount or interpolation.
+   * @param options Optional. Polyglot options. Can be number for `smart_count` or interpolation.
    */
   t(phrase: string, options?: number | Polyglot.InterpolationOptions): string;
 }
