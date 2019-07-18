@@ -32,6 +32,11 @@ export interface LocalizeProviderProps {
    * objects. Default: false.
    */
   noCache?: boolean;
+  /**
+   * If true, will apply pseudo localization to all returned strings. Do not
+   * enable this in production.
+   */
+  pseudolocalize?: boolean;
 }
 
 /* --- Other types --- */

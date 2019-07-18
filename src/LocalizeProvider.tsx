@@ -1,8 +1,9 @@
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {LocalizeContext, localizePolyglot} from './Instances';
 import {LocalizeContextValue, LocalizeProviderProps, Phrases} from './types';
+import {pseudoLocalize} from './utils';
 
-export const LocalizeProvider: React.FC<LocalizeProviderProps> = ({children, getPhrases, noCache}) => {
+export const LocalizeProvider: React.FC<LocalizeProviderProps> = ({children, getPhrases, noCache, pseudolocalize}) => {
   // Ref for function to prevent reloading if arrow.
   const getPhrasesRef = useRef(getPhrases);
 
@@ -89,6 +90,15 @@ export const LocalizeProvider: React.FC<LocalizeProviderProps> = ({children, get
     [cachedPhrases],
   );
 
+  const t = useCallback<LocalizeContextValue['t']>(
+    (phrase, options) => {
+      const localizedString = localizePolyglot.t(phrase, options);
+      if (pseudolocalize) return pseudoLocalize(localizedString);
+      return localizedString;
+    },
+    [pseudolocalize],
+  );
+
   const value = useMemo<LocalizeContextValue>(
     () => ({
       loading,
@@ -97,9 +107,9 @@ export const LocalizeProvider: React.FC<LocalizeProviderProps> = ({children, get
       setLanguage,
       isLanguageCached,
       clearCache,
-      t: (phrase, options?) => localizePolyglot.t(phrase, options),
+      t,
     }),
-    [loading, error, currentLanguage, setLanguage, isLanguageCached, clearCache],
+    [loading, error, currentLanguage, setLanguage, isLanguageCached, clearCache, t],
   );
 
   return <LocalizeContext.Provider value={value}>{children}</LocalizeContext.Provider>;

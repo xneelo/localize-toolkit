@@ -30,6 +30,7 @@ table of contents to jump to a specific item within these.
    - [LocalizeProvider Props](#localizeprovider-props)
      - [getPhrases](#getphrases-language-string--promisephrases)
      - [noCache](#nocache-boolean)
+     - [noCache](#pseudolocalize-boolean)
    - [Example Initialization](#example-initialization)
 2. [LocalizeContext](#localizecontext)
    - [LocalizeContext API](#localizecontext-api)
@@ -98,6 +99,12 @@ component.
   phrases will be cached within the provider. Any subsequent attempts to switch
   to these languages will require a new phrases object be provided, or will make
   a call to `getPhrases`.
+
+#### `pseudolocalize`: _`boolean`_
+
+- By default, this is false. If set to true, will apply pseudo localization to
+  all returned strings. This is for testing if your application can adapt to
+  longer strings from other languages. **Do not enable this in production.**
 
 ### Example Initialization
 
