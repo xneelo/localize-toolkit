@@ -12,12 +12,14 @@ localization library to provide robust localization tools for React projects.
 
 **Examples**:
 
-1. [Minimal Example](https://codesandbox.io/s/yprnw94rwj)
+1. [Minimal Example](https://codesandbox.io/s/20-localize-toolkit-minimal-u3333)
    - The absolute bare-bones example of using Localize Toolkit
 1. ["Kitchen Sink" Full Example](https://codesandbox.io/s/v63mqkm95y)
    - A full example with faked API calls to fetch new languages
 1. [Overlay Pattern Example](https://codesandbox.io/s/0n6xy6800)
    - A pattern to avoid remounting entirely, with an overlay for loading
+1. [Pseudo Localization](https://codesandbox.io/s/20-localize-toolkit-pseudo-localization-lpp1q)
+   - An example using pseudo localization (useful for testing)
 
 The toolkit exposes 5 items: [LocalizeProvider](#localizeprovider),
 [LocalizeContext](#localizecontext), [Localize](#localize),
