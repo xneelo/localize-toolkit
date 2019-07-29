@@ -32,7 +32,7 @@ table of contents to jump to a specific item within these.
    - [LocalizeProvider Props](#localizeprovider-props)
      - [getPhrases](#getphrases-language-string--promisephrases)
      - [noCache](#nocache-boolean)
-     - [noCache](#pseudolocalize-boolean)
+     - [pseudolocalize](#pseudolocalize-boolean)
    - [Example Initialization](#example-initialization)
 2. [LocalizeContext](#localizecontext)
    - [LocalizeContext API](#localizecontext-api)
