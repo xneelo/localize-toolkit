@@ -209,20 +209,18 @@ import React, {useContext, useEffect} from 'react';
 import {Localize, useLocalize} from 'localize-toolkit';
 
 function MyComponent({}) {
-  const localize = useLocalize();
+  const {setLanguage, t} = useLocalize();
 
-  const setLanguage = localize.setLanguage;
   useEffect(() => {
     setLanguage('en');
   }, [setLanguage]);
 
-  const translateOutsideOfJSX = () => {
-    return localize.t('translate_token');
-  };
-
   return (
     <>
-      {translateOutsideOfJSX()}
+      {/* To translate using the context: */}
+      {t('translate_token')}
+
+      {/* To translate as a JSX element: */}
       <Localize t={'translate_token'} />
     </>
   );
@@ -239,21 +237,19 @@ class MyComponent extends Component {
   static contextType = LocalizeContext;
 
   componentDidMount() {
-    const localize = this.context;
-    localize.setLanguage('en');
-  }
-
-  translateOutsideOfJSX() {
-    const localize = this.context;
-    return localize.t('translate_token');
+    const {setLanguage} = this.context;
+    setLanguage('en');
   }
 
   render() {
-    const localize = this.context;
+    const {t} = this.context;
 
     return (
       <>
-        {this.translateOutsideOfJSX()}
+        {/* To translate using the context: */}
+        {t('translate_token')}
+
+        {/* To translate as a JSX element: */}
         <Localize t={'translate_token'} />
       </>
     );
