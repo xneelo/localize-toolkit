@@ -90,13 +90,15 @@ export const LocalizeProvider: React.FC<LocalizeProviderProps> = ({children, get
     [cachedPhrases],
   );
 
+  // Additional cache-bust on currentLanguage to ensure that if `t` is memoized
+  // it will still update when the language changes.
   const t = useCallback<LocalizeContextValue['t']>(
     (phrase, options) => {
       const localizedString = localizePolyglot.t(phrase, options);
       if (pseudolocalize) return pseudoLocalize(localizedString);
       return localizedString;
     },
-    [pseudolocalize],
+    [pseudolocalize, currentLanguage], // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   const value = useMemo<LocalizeContextValue>(
