@@ -43,6 +43,7 @@ table of contents to jump to a specific item within these.
      - [setLanguage](#setlanguage-language-string-phrases-phrases--promisevoid)
      - [clearCache](#clearcache-language-string--void)
      - [t](#t-phrase-string-options-number--polyglotinterpolationoptions--string)
+     - [tt](#t-phrase-string-options-number--polyglotinterpolationoptions--string)
    - [Example Use](#example-use)
      - [How to consume context](#how-to-consume-context)
      - [Example in Functional Component](#example-in-functional-component)
@@ -174,7 +175,61 @@ All methods for localization and updating the
 #### `t`: _`(phrase: string, options?: number | Polyglot.InterpolationOptions) => string;`_
 
 - This is the Polyglot `t` method. For information on how to use this, check the
-  [documentation](http://airbnb.io/polyglot.js/);
+  [documentation](http://airbnb.io/polyglot.js/).
+
+#### `tt`: _`<Lang>(options?: number | Polyglot.InterpolationOptions): (...args: string[]) => string;`_
+
+- tt stands for typed-t and it has some special properties and use cases. If you
+  have a TypeScript type definition for the structure of your phrases object you
+  can use `tt` to throw errors if you use incorrect keys or change the keys in
+  your language object. Every member of `...args` must be a valid key in the
+  `Lang` object provided (the actual type definition is much too verbose to
+  write here,
+  [check out the source code](https://github.com/xneelo/localize-toolkit/blob/master/src/types.ts)
+  if you want to see it).
+
+- The use is slightly different than `t`. If you aren't sure which to use, or if
+  you aren't using TypeScript, definitely use `t`. This function is solely for
+  ensuring type safety across large applications with rapidly changing phrase
+  objects. Here's an example of the use cases compared to `t`.
+
+  ```ts
+  // An example phrases object.
+  const phrases = {
+    hello_world: 'Hello World!',
+    sizes: {
+      mb: '%{smart_count}MB',
+    },
+    names: {
+      by_name: 'By %{name}',
+    },
+  };
+
+  // Get the TypeScript type of the object.
+  type Phrases = typeof phrases;
+
+  // Examples using `tt`.
+  const hiWrld = localize.tt<Phrases>()('hello_world');
+  const sizeMb = localize.tt<Phrases>(4)('sizes', 'mb');
+  const byName = localize.tt<Phrases>({name: 'John Doe'})('names', 'by_name');
+
+  // Examples using `t`.
+  const hiWrld = localize.t('hello_world');
+  const sizeMb = localize.t('sizes.mb', 4);
+  const byName = localize.t('names.by_name', {name: 'John Doe'});
+  ```
+
+  As you can see, it is much more verbose, but it does help ensure you're
+  correct:
+
+  ```ts
+  const sizeMb = localize.tt<Phrases>(4)('sizes', 'mbzzzz');
+  // error: Argument of type '"mbzzzz"' is not assignable to parameter
+  // of type '"mb" | undefined'. ts(2345)
+
+  const sizeMb = localize.t('sizes.mbzzzz', 4);
+  // no error thrown, as it's just a string.
+  ```
 
 ### Example Use
 

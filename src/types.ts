@@ -89,4 +89,39 @@ export interface LocalizeContextValue extends Translate {
    * entire cache of language objects.
    */
   clearCache(language?: string): void;
+  /**
+   * Strongly typed version of t. Must be called with the typeof your language
+   * object.
+   */
+  tt<Lang>(
+    options?: number | Polyglot.InterpolationOptions,
+  ): <
+    A extends keyof Lang,
+    B extends keyof Omit<Lang[A], keyof string>,
+    C extends keyof Omit<Lang[A][B], keyof string>,
+    D extends keyof Omit<Lang[A][B][C], keyof string>,
+    E extends keyof Omit<Lang[A][B][C][D], keyof string>,
+    F extends keyof Omit<Lang[A][B][C][D][E], keyof string>,
+    G extends keyof Omit<Lang[A][B][C][D][E][F], keyof string>,
+    H extends keyof Omit<Lang[A][B][C][D][E][F][G], keyof string>,
+    I extends keyof Omit<Lang[A][B][C][D][E][F][G][H], keyof string>,
+    J extends keyof Omit<Lang[A][B][C][D][E][F][G][H][I], keyof string>,
+    K extends keyof Omit<Lang[A][B][C][D][E][F][G][H][I][J], keyof string>,
+    L extends keyof Omit<Lang[A][B][C][D][E][F][G][H][I][J][K], keyof string>,
+    M extends keyof Omit<Lang[A][B][C][D][E][F][G][H][I][J][K][L], keyof string>
+  >(
+    a: A,
+    b?: B,
+    c?: C,
+    d?: D,
+    e?: E,
+    f?: F,
+    g?: G,
+    h?: H,
+    i?: I,
+    j?: J,
+    k?: K,
+    l?: L,
+    m?: M,
+  ) => string;
 }

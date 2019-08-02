@@ -101,6 +101,11 @@ export const LocalizeProvider: React.FC<LocalizeProviderProps> = ({children, get
     [pseudolocalize, currentLanguage], // eslint-disable-line react-hooks/exhaustive-deps
   );
 
+  const tt = useCallback<LocalizeContextValue['tt']>(
+    options => (...phraseKeys) => t(phraseKeys.filter(Boolean).join('.'), options),
+    [t],
+  );
+
   const value = useMemo<LocalizeContextValue>(
     () => ({
       loading,
@@ -110,8 +115,9 @@ export const LocalizeProvider: React.FC<LocalizeProviderProps> = ({children, get
       isLanguageCached,
       clearCache,
       t,
+      tt,
     }),
-    [loading, error, currentLanguage, setLanguage, isLanguageCached, clearCache, t],
+    [loading, error, currentLanguage, setLanguage, isLanguageCached, clearCache, t, tt],
   );
 
   return <LocalizeContext.Provider value={value}>{children}</LocalizeContext.Provider>;
