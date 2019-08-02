@@ -43,7 +43,7 @@ table of contents to jump to a specific item within these.
      - [setLanguage](#setlanguage-language-string-phrases-phrases--promisevoid)
      - [clearCache](#clearcache-language-string--void)
      - [t](#t-phrase-string-options-number--polyglotinterpolationoptions--string)
-     - [tt](#t-phrase-string-options-number--polyglotinterpolationoptions--string)
+     - [tt](#tt-langoptions-number--polyglotinterpolationoptions-args-string--string)
    - [Example Use](#example-use)
      - [How to consume context](#how-to-consume-context)
      - [Example in Functional Component](#example-in-functional-component)
