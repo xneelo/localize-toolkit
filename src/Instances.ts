@@ -19,6 +19,9 @@ export const LocalizeContext = React.createContext<LocalizeContextValue>({
   t: () => {
     throw new Error('No provider');
   },
+  tt: () => {
+    throw new Error('No provider');
+  },
 });
 
 /** Localize polyglot instance. */
