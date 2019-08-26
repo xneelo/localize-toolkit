@@ -93,7 +93,7 @@ export interface LocalizeContextValue extends Translate {
    * Strongly typed version of t. Must be called with the typeof your language
    * object.
    */
-  tt<Lang>(
+  tt<Lang extends Phrases>(
     options?: number | Polyglot.InterpolationOptions,
   ): <
     A extends keyof Lang,

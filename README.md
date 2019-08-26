@@ -231,6 +231,38 @@ All methods for localization and updating the
   // no error thrown, as it's just a string.
   ```
 
+> Note: There are some gotchas for `tt` and they are:
+>
+> 1. The keys in your phrases object **must** not be a method of String (you can
+>    find a list
+>    [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#Methods_2).)
+>    This is required so that the typing works correctly. You can avoid using
+>    these methods by specifically using snake_case. You will notice if you do
+>    use a String method, since it will not allow you to specify that key in the
+>    `tt` function.
+>
+> 1. It will not catch errors where you don't fully put in the keys. For
+>    example, this will not throw an error:
+>
+>    ```ts
+>    const sizeMb = localize.tt<Phrases>(4)('sizes');
+>    ```
+>
+>    even though it should be `('sizes', 'mb')`.
+>
+> 1. Do not type the phrases object with `Phrases`.
+>
+>    ```ts
+>    // Don't do this:
+>    const phrases: Phrases = {hello_world: 'Hello World!'};
+>
+>    // Do this:
+>    const phrases = {hello_world: 'Hello World!'};
+>    ```
+>
+>    It will cause an issue where the `tt` type assertion is unable to properly
+>    parse the multiple nested object keys.
+
 ### Example Use
 
 Here are some examples for using the localize context within your components.
